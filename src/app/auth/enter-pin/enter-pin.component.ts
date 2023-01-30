@@ -40,10 +40,6 @@ export class EnterPinComponent implements OnInit {
       pin4: fb.control({ value: '', disabled: true }, Validators.required),
     });
     this.enterpinGroup.valueChanges.subscribe((x) => {
-      // {value:'',disabled:true}
-      // this.enterpinGroup.get('pin2').disable();
-      //  this.enterpinGroup.get('pin3').disable();
-      //   this.enterpinGroup.get('pin4').disable();
       if (x.pin1) {
         this.enterpinGroup.get('pin2').enable({ onlySelf: true });
       }

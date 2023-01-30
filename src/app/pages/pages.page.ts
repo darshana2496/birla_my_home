@@ -26,17 +26,7 @@ export class PagesComponent {
     public menuCtrl: MenuController,
     public router: Router
   ) {}
-  // slideOpts3 = {
-  //   slidesPerView: 3,
-  //   coverflowEffect: {
-  //     rotate: 50,
-  //     stretch: 0,
-  //     depth: 100,
-  //     modifier: 1,
-  //     slideShadows: true,
-  //   },
-  // };
-  //when slider is selected
+
   selectProject(index: number, projectObj: any) {
     this.globalService.customerId = projectObj.customerProjectId.toString(); //used in api calls
     this.globalService.activeSlideIndicator = index;

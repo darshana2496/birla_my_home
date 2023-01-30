@@ -91,15 +91,6 @@ export class SetPinComponent implements OnInit {
       return false;
     }
   }
-
-  // isPinDifferent(pin1: any, pin2: any) {
-  //   if (pin1 != pin2) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
-
   get formErr() {
     return this.pinGroup.controls;
   }

@@ -69,7 +69,7 @@ export class LoginWithCustIdPage implements OnInit {
 
 
     }
-    // this.router.navigate(['/otp'])
+   
   }
   inputChanged(event) {}
 }
