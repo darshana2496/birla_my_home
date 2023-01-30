@@ -1,3 +1,4 @@
+import { Device } from '@awesome-cordova-plugins/device/ngx';
 import { AssetsPreviewComponent } from './../common-components/assets-preview/assets-preview.component';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -43,7 +44,6 @@ export class GlobalService {
     vcKeySecret: '',
   };
   encryptedCustId: String;
-  oneSignalPlayerId: string;
   setPinValue: string;
   isPhoneUnlocked: boolean = false;
   selectedProjectObj: ICustomerProject = {
@@ -74,7 +74,8 @@ export class GlobalService {
     public menuCtrl: MenuController,
     public route: Router,
     public toastCtrl: ToastController,
-    public modalCtrl: ModalController
+    public modalCtrl: ModalController,
+    public device: Device
   ) {}
   getTermOfUse() {
     let promise = new Promise((resolve, reject) => {
@@ -458,7 +459,7 @@ export class GlobalService {
         let obj = {
           vcCustomerID: this.encryptedCustId,
           vcIp: '',
-          vcDeviceID: '',
+          vcDeviceID: this.device.uuid,
           // vcDeviceID: "db377163-09a3-48f6-a93f-13210a82f3ea"
         };
 
