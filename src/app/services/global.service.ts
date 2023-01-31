@@ -43,7 +43,6 @@ export class GlobalService {
     vcKeySecret: '',
   };
   encryptedCustId: String;
-  oneSignalPlayerId: string;
   setPinValue: string;
   isPhoneUnlocked: boolean = false;
   selectedProjectObj: ICustomerProject = {
@@ -65,6 +64,7 @@ export class GlobalService {
   isAppReviewed: boolean;
   isShowingLoader: boolean;
   notification_count = 0;
+  deviceId: any;
 
   constructor(
     public _http: HttpClient,
@@ -458,7 +458,7 @@ export class GlobalService {
         let obj = {
           vcCustomerID: this.encryptedCustId,
           vcIp: '',
-          vcDeviceID: '',
+          vcDeviceID: this.deviceId,
           // vcDeviceID: "db377163-09a3-48f6-a93f-13210a82f3ea"
         };
 
