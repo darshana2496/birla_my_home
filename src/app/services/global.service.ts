@@ -1,4 +1,3 @@
-import { Device } from '@awesome-cordova-plugins/device/ngx';
 import { AssetsPreviewComponent } from './../common-components/assets-preview/assets-preview.component';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -65,6 +64,7 @@ export class GlobalService {
   isAppReviewed: boolean;
   isShowingLoader: boolean;
   notification_count = 0;
+  deviceId: any;
 
   constructor(
     public _http: HttpClient,
@@ -74,8 +74,7 @@ export class GlobalService {
     public menuCtrl: MenuController,
     public route: Router,
     public toastCtrl: ToastController,
-    public modalCtrl: ModalController,
-    public device: Device
+    public modalCtrl: ModalController
   ) {}
   getTermOfUse() {
     let promise = new Promise((resolve, reject) => {
@@ -459,7 +458,7 @@ export class GlobalService {
         let obj = {
           vcCustomerID: this.encryptedCustId,
           vcIp: '',
-          vcDeviceID: this.device.uuid,
+          vcDeviceID: this.deviceId,
           // vcDeviceID: "db377163-09a3-48f6-a93f-13210a82f3ea"
         };
 
