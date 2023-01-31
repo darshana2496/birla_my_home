@@ -240,7 +240,7 @@ export class PaymentsPage implements OnInit {
         }
       })
       .catch((response: any) => {
-        console.log(response);
+     
       });
   }
   shareFile() {}

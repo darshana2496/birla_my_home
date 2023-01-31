@@ -40,14 +40,6 @@ export class AssetsPreviewComponent implements OnInit {
       }
     }
 
-    // if (this.previewData.fileType == "video") {
-
-    //   var previewVideo = "https://www.youtube.com/embed/" + this.previewData.linkName;
-    //   console.log("previewVideo", previewVideo);
-    //   this.trustedVideoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(previewVideo);
-    //   //this.globalService.showLoadingModel();
-
-    // }
   }
   closePage(): void {
     this.modalCtrl.dismiss();

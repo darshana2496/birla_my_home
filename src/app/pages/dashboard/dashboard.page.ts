@@ -150,7 +150,7 @@ export class DashBoard implements OnInit {
         }
       })
       .catch((response: any) => {
-        console.log(response);
+      
       });
   }
 

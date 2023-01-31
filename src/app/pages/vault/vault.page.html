@@ -56,25 +56,17 @@
                 </div>
               </ion-item>
               <ion-item-options side="end" class="act-wrap">
-                <!-- <icon-button [buttonType]="'share'" [allSlidesData]="adminUploadedDocs" [pageData]="adminDocs"
-                    [pageName]="'vault'">
-                  </icon-button> -->
                 <ion-button
                   class="app-btn btn-icon"
-                  (click)="shareDoc(adminDocs)"
-                >
+                  (click)="shareDoc(adminDocs)">
                   <ion-icon name="share-social-outline"></ion-icon>
-                  <!-- <ion-icon slot="start" name="share"></ion-icon> -->
-                  <!-- <span class="icon" class="icon-share">
-                    </span> -->
                 </ion-button>
               </ion-item-options>
             </ion-item-sliding>
           </div>
           <div
             class="ion-text-left"
-            *ngIf="(adminUploadedDocs | searchFilterPipe :searchText).length === 0 || !adminUploadedDocs.length"
-          >
+            *ngIf="(adminUploadedDocs | searchFilterPipe :searchText).length === 0 || !adminUploadedDocs.length">
             No documents found.
           </div>
         </ion-list>
