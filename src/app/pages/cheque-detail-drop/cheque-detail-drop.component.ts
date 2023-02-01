@@ -36,7 +36,7 @@ export class ChequeDetailDropComponent implements OnInit {
         }
       })
       .catch((response) => {
-        console.log(response);
+    
       });
   }
   onTermsChanged(event: Event) {
@@ -80,7 +80,7 @@ export class ChequeDetailDropComponent implements OnInit {
         }
       })
       .catch((response: any) => {
-        console.log(response, 'response error');
+
       });
   }
 }

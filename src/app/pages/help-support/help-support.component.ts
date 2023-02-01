@@ -41,7 +41,7 @@ export class HelpSupportComponent implements OnInit {
         }
       })
       .catch((response: any) => {
-        console.log(response);
+     
       });
 
     this.globalService
@@ -54,7 +54,7 @@ export class HelpSupportComponent implements OnInit {
         }
       })
       .catch((response: any) => {
-        console.log(response);
+    
       });
 
     this.globalService
@@ -67,7 +67,7 @@ export class HelpSupportComponent implements OnInit {
         }
       })
       .catch((response: any) => {
-        console.log(response);
+        
       });
   }
 
@@ -93,7 +93,7 @@ export class HelpSupportComponent implements OnInit {
         }
       })
       .catch((response: any) => {
-        console.log(response);
+       
       });
   }
   goToPage(pageType): void {

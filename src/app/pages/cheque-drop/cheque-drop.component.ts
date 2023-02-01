@@ -25,7 +25,7 @@ export class ChequeDropComponent implements OnInit {
         }
       })
       .catch((response: any) => {
-        console.log(response);
+       
       });
   }
   share(data) {
@@ -38,7 +38,6 @@ export class ChequeDropComponent implements OnInit {
           this.globalService.hideLoader();
       })
       .catch((error: any) => {
-        console.log(error);
       });
   }
 }

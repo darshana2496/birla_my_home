@@ -26,13 +26,13 @@ export class ThankYouModalComponent implements OnInit {
       comment: fb.control('', Validators.required),
     });
     this.myform.valueChanges.subscribe((values) => {
-      console.log(values);
+
       if (values.exp == '' || values.comment == '') {
         this.disableBtn = true;
       } else {
         this.disableBtn = false;
       }
-      console.log(this.disableBtn);
+     
     });
   }
 
@@ -54,7 +54,7 @@ export class ThankYouModalComponent implements OnInit {
     this.globalService
       .postFeedback(object)
       .then((response: any) => {
-        console.log(response);
+      
         if (response.btIsSuccess) {
           this.storage.set('AppReviewed', true);
           this.globalService.isAppReviewed = true;
@@ -63,26 +63,18 @@ export class ThankYouModalComponent implements OnInit {
             'Thanks, for sharing your feedback.',
             'Ok'
           );
-          //      let animations:AnimationOptions={
-          //   animated: true,
-          //   animationDirection: "back"
-          // }
-          // this.navCtrl.back(animations)
+       
         } else {
         }
       })
       .catch((response: any) => {
-        console.log(response);
+     
       });
     const modal = await this.modalCtrl.getTop();
     modal.dismiss();
   }
   async closePage() {
-    // let animations:AnimationOptions={
-    //   animated: true,
-    //   animationDirection: "back"
-    // }
-    // this.navCtrl.back(animations)
+
     const modal = await this.modalCtrl.getTop();
     modal.dismiss();
   }

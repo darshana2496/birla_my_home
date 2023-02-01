@@ -111,7 +111,7 @@ export class VaultPage implements OnInit {
         }
       })
       .catch((response: any) => {
-        console.log(response);
+     
       });
   }
 
@@ -153,7 +153,7 @@ export class VaultPage implements OnInit {
         this.globalService.hideLoader();
       })
       .catch((error: any) => {
-        console.log(error);
+    
       });
   }
 }

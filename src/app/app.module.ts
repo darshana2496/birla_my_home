@@ -6,7 +6,7 @@ import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthenticationService } from './services/authentication.service';
+
 import { DateFormatPipe } from './utilities/pipes/date-format.pipe';
 import { TimeInMinsFormatPipe } from './utilities/pipes/time-in-mins.pipe';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -32,7 +32,6 @@ import { Diagnostic } from '@ionic-native/diagnostic/ngx';
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     DateFormatPipe,
     TimeInMinsFormatPipe,
-    AuthenticationService,
     SocialSharing,
     Device,
     Diagnostic,

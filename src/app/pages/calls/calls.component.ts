@@ -16,7 +16,7 @@ export class CallsComponent implements OnInit {
 
   ngOnInit() {
     this.globalService.getRMDetails().then((response: any) => {
-      console.log(response);
+     
       let data = response.object;
       if (response.btIsSuccess) {
         if (data.vcName == null) {
@@ -40,7 +40,7 @@ export class CallsComponent implements OnInit {
         this.managerContactNo = null;
       }
     }).catch((response: any) => {
-      console.log(response);
+     
     });
   }
 

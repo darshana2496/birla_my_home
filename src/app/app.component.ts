@@ -103,7 +103,7 @@ export class AppComponent {
         this.setInitialPage(val);
       });
 
-      //used to check for tabs
+     
       // platform.backButton.subscribe((event) => {
       //   alert(event);
       //   let menuBarOpen = this.menuCtrl.isOpen();
@@ -198,7 +198,7 @@ export class AppComponent {
   setInitialPage(pin: any): void {
     this.globalService.setInitialProject(); //used to get list of customerProjects added and get if isAppReviewd
     if (pin != null) {
-      // this.router.navigate(['dashboard']);
+  
       this.router.navigate(['enter-pin']);
     } else {
       this.storage.get('FirstTimeAppLoad').then((val) => {

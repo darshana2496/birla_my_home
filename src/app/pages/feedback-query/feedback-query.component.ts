@@ -35,13 +35,6 @@ export class FeedbackQueryComponent implements OnInit {
       this.getAddedFeedbackList();
     }
   }
-  // createForm() {
-
-  //   this.onChanges();
-  // }
-  // onChanges() {
-
-  // }
   clearFilter(): void {
     this.myform.controls['query'].setValue('121');
     this.myform.controls['feedback'].setValue('');

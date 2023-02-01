@@ -12,7 +12,7 @@ export class AddedProjectSuccessComponent implements OnInit {
   constructor(private modalCtrl: ModalController) { }
 
   ngOnInit() {
-    console.log(this.values,'Value Check')
+
   }
   async close(){
     const modal = await this.modalCtrl.getTop();

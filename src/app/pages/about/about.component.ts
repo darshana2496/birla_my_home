@@ -44,12 +44,12 @@ export class AboutComponent implements OnInit {
         }
       })
       .catch((response: any) => {
-        console.log(response);
+        
       });
   }
   async viewProject(projectLink: string) {
     if (projectLink.length != null)
       if (projectLink.length) await Browser.open({ url: projectLink });
-    // this.inAppBrowser.create(projectLink, "_system")
+    
   }
 }
