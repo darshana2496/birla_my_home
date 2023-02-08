@@ -64,7 +64,7 @@ export class LoginWithCustIdPage implements OnInit {
           }
         })
         .catch((response: any) => {
-          console.log(response);
+       
         });
 
 

@@ -13,7 +13,7 @@ export class AddProjectComponent implements OnInit {
 
   ngOnInit() {}
   inputBtn() {
-    console.log('button clicked')
+   
    
       let addedProj = this.globalService.projectList;
       for (let i = 0; i < addedProj.length; i++) {
@@ -25,7 +25,7 @@ export class AddProjectComponent implements OnInit {
       }
 
       this.globalService.validateCustomerLogic(Number(this.typedText)).then((response: any) => {
-        console.log(response);
+
         if (response.btIsSuccess) {
           this.router.navigate(['/otp'])
           // this.navCtrl.push("ValidateCustIdPage", { "serverResponse": response.object });
@@ -34,7 +34,7 @@ export class AddProjectComponent implements OnInit {
         }
         this.typedText = "";
       }).catch((response: any) => {
-        console.log(response);
+       
       })
     
   }

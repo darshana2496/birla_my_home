@@ -35,7 +35,7 @@ export class KnowYourCustIdPage implements OnInit {
     if(this.selectedDate != undefined){
       
       let startDate = formatDate(this.selectedDate,"dd-MM-yyyy",'en-US');
-  console.log(this.selectedDate,"Selected",startDate)
+ 
   this.knowCustIdForm.controls['dob'].setValue(startDate) 
   const modal = await this.modalCtrl.getTop();
       this.canDismiss=true
@@ -82,7 +82,7 @@ export class KnowYourCustIdPage implements OnInit {
                 this.errorMsg = data.vcDescription;
             }
         }).catch((data: any) => {
-          console.log(data);
+        
         });
     } else {
       this.knowCustIdForm.markAllAsTouched()

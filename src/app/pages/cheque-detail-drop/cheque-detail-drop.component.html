@@ -33,19 +33,7 @@
                   >
                 </ion-select>
               </ion-item>
-              <!-- <ion-item>
-                <ion-label position="floating">Location </ion-label>
-                <ion-select  name="location" formControlName="location" required>
-                  <ion-select-option value="{{loc.intLocationID}}" *ngFor="let loc of dropLocationList">{{loc.vcLocation}}</ion-select-option>
-                </ion-select>
-              </ion-item> -->
-              <!-- <div class="error opacity-none" *ngIf="myform.get('location').errors">
-                Location Select
-              </div> -->
-
-              <!-- [ngClass]="{'opacity-full':myform.get('location').errors?.required && (myform.get('location').dirty || myform.get('location').touched)}" 
-              [class.opacity-full]="myform.get('location').errors && (myform.get('location').dirty || myform.get('location').touched"-->
-              <!-- <span>myform.get('location').errors</span> -->
+             
               <div
                 class="error opacity-none"
                 [ngClass]="{
@@ -58,7 +46,7 @@
                 Location is required.
               </div>
             </div>
-            <!-- (click)="showModal()" -->
+           
             <div
               class="form-group typ-band bot-space"
               id="open-modal"
@@ -68,7 +56,7 @@
                 <ion-label class="app-field-label" position="floating"
                   >Date</ion-label
                 >
-                <!-- <ion-datetime-button datetime="datetime"></ion-datetime-button>-->
+                
                 <ion-input
                   class="app-form-control"
                   required
@@ -145,14 +133,14 @@
             </ion-toolbar>
           </ion-header>
           <ion-content>
-            <!-- <p class="ion-padding-horizontal"></p> -->
+            
             <ion-item>
               <ion-datetime
                 presentation="date"
                 (ionChange)="onTermsChanged($event)"
                 [(ngModel)]="selectedDate"
               ></ion-datetime>
-              <!-- <ion-checkbox id="terms"  [checked]="canDismiss"></ion-checkbox> -->
+              
             </ion-item>
           </ion-content>
         </ng-template>

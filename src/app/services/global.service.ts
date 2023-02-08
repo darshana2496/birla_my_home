@@ -518,12 +518,9 @@ export class GlobalService {
 
   async showLoader() {
     this.isShowingLoader = true;
-    // console.log('Inside Show Loader', this.loader);
-
     return await this.loadingCtrl
       .create({
         message: "<img src='../assets/images/loader.gif' alt='loader'>",
-        // duration: 5000,
       })
       .then((a) => {
         a.present().then(() => {

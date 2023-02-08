@@ -22,7 +22,7 @@ terms:string;
         this.terms = "null";
       }
     }).catch((resp: any) => {
-      console.log(resp);
+      
     });
    
   

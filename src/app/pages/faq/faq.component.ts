@@ -33,7 +33,7 @@ export class FaqComponent implements OnInit {
         }
       })
       .catch((response: any) => {
-        console.log(response);
+        
       });
   }
 

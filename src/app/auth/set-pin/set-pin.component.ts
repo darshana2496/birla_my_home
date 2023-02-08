@@ -61,9 +61,9 @@ export class SetPinComponent implements OnInit {
       if (val.pin1 && val.pin2 && val.pin3 && val.pin4) {
         let existingPin = val.pin1 + val.pin2 + val.pin3 + val.pin4;
         this.setSecondPin = existingPin;
-        console.log(this.setSecondPin, 'Second Pin');
+       
         if (this.isPinMatching(this.setfirstPin, this.setSecondPin)) {
-          // this.pinGroup.get('secondPin').updateValueAndValidity();
+          
           this.submitted = true;
         } else {
           this.pinGroup.get('secondPin').setErrors({ match: false });
@@ -84,10 +84,10 @@ export class SetPinComponent implements OnInit {
   }
   isPinMatching(pin1: any, pin2: any) {
     if (pin1 == pin2) {
-      console.log('Pin Matched fn');
+     
       return true;
     } else {
-      console.log('Pin Not Matched fn');
+    
       return false;
     }
   }

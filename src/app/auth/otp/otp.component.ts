@@ -120,7 +120,7 @@ export class OtpComponent implements OnInit {
                   //when user is logged in
                   // this.navCtrl.push("ModalProjectAddSuccessPage", { 'projectObj': obj })
                   // call modal of project added successfully
-                  console.log(response, 'response from local');
+                  
                   this.globalService.showaddedProjectModal(obj);
                   this.router.navigate(['/enter-pin']);
                   // this.router.navigate(['/add-project']);
@@ -139,7 +139,7 @@ export class OtpComponent implements OnInit {
           }
         })
         .catch((data: any) => {
-          console.log(data);
+         
         });
     }
   }
