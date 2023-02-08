@@ -65,6 +65,7 @@ export class GlobalService {
   isShowingLoader: boolean;
   notification_count = 0;
   deviceId: any;
+  onesignalPlayerId: any;
 
   constructor(
     public _http: HttpClient,
@@ -458,7 +459,7 @@ export class GlobalService {
         let obj = {
           vcCustomerID: this.encryptedCustId,
           vcIp: '',
-          vcDeviceID: this.deviceId,
+          vcDeviceID: this.onesignalPlayerId,
           // vcDeviceID: "db377163-09a3-48f6-a93f-13210a82f3ea"
         };
 

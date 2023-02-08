@@ -72,7 +72,7 @@ export class OtpComponent implements OnInit {
         vcCustomerID: this.globalService.encryptedCustId,
         vcIp: this.globalService.deviceIP,
         // "vcIp": "192.168.1.100",
-        vcDeviceID: this.deviceId,
+        vcDeviceID: this.globalService.onesignalPlayerId,
         vcOtp: this.otpFormGroup.value.otp.toString(),
       };
       this.globalService
