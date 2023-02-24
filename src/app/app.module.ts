@@ -15,7 +15,7 @@ import { IonicStorageModule } from '@ionic/storage-angular';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Diagnostic } from '@ionic-native/diagnostic/ngx';
-
+import { HTTP } from '@ionic-native/http/ngx';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -35,6 +35,7 @@ import { Diagnostic } from '@ionic-native/diagnostic/ngx';
     SocialSharing,
     Device,
     Diagnostic,
+    HTTP,
   ],
   bootstrap: [AppComponent],
 })

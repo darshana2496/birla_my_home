@@ -1,3 +1,4 @@
+import { PaymentGatewayResponseComponent } from './payment-gateway-response/payment-gateway-response.component';
 import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -35,7 +36,7 @@ import { PipesModule } from '../utilities/pipes/pipes.module';
     CommonComponentsModule,
     PagesRoutingModule,
     ReactiveFormsModule,
-    PipesModule
+    PipesModule,
   ],
   declarations: [
     PagesComponent,
@@ -55,8 +56,9 @@ import { PipesModule } from '../utilities/pipes/pipes.module';
     CallsComponent,
     ThankYouModalComponent,
     AddProjectComponent,
-    AddedProjectSuccessComponent
+    AddedProjectSuccessComponent,
+    PaymentGatewayResponseComponent,
   ],
-  providers:[SocialSharing]
+  providers: [SocialSharing],
 })
 export class PagesModule {}

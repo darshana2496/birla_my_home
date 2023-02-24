@@ -1,3 +1,4 @@
+import { PaymentGatewayResponseComponent } from './payment-gateway-response/payment-gateway-response.component';
 import { FormLayoutComponent } from './form-layout/form-layout.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -37,7 +38,8 @@ const routes: Routes = [
         component: HelpSupportComponent,
       },
       {
-        path:'add-project',component:AddProjectComponent
+        path: 'add-project',
+        component: AddProjectComponent,
       },
       {
         path: 'faq',
@@ -52,8 +54,12 @@ const routes: Routes = [
         component: ThankYouModalComponent,
       },
       {
-        path: 'make-payment',
+        path: 'make-payment/:amount',
         component: MakePaymentComponent,
+      },
+      {
+        path: 'payment-gateway-response',
+        component: PaymentGatewayResponseComponent,
       },
       {
         path: 'cheque-detail-drop',

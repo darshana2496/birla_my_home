@@ -1,63 +1,60 @@
 .bs-appIntro {
-    .button-parent {
+  .button-parent {
+    position: absolute;
+    bottom: 16rem;
+    right: 0;
+    left: 0;
+  }
+
+  &.typ-landing {
+    --background: url(../../images/intro4.jpg) no-repeat 0 0 transparent;
+
+    background-size: cover;
+
+    .introSlider {
+      .mod-appintro {
         position: absolute;
-        bottom: 16rem;
+        top: 50%;
         right: 0;
         left: 0;
-    }
+        transform: translateY(50%);
 
-    &.typ-landing {
-
-        --background: url(../../images/intro4.jpg) no-repeat 0 0 transparent;
-
-        background-size: cover;
-
-        .introSlider {
-            .mod-appintro {
-                position: absolute;
-                top: 50%;
-                right: 0;
-                left: 0;
-                transform: translateY(50%);
-
-                .title {
-                    text-align: center;
-                }
-            }
+        .title {
+          text-align: center;
         }
+      }
     }
+  }
 
-    .app-intro-logo-wrap {
-        height: 80px;
-        position: relative;
-        top: 25px;
+  .app-intro-logo-wrap {
+    // height: 80px;
+    position: relative;
+    top: 25px;
 
-        app-header {
-            height: 100%;
+    app-header {
+      height: 100%;
 
-            .bs-header {
-                height: 100%;
+      .bs-header {
+        height: 100%;
 
-                ion-toolbar {
-                    height: 100%;
+        ion-toolbar {
+          height: 100%;
 
-                    &::shadow {
-                        .toolbar-container {
-                            height: 100% !important;
-                        }
-                    }
-
-
-                }
-
-                &.header-ios ion-toolbar:last-of-type {
-                    --border-width: 0;
-                }
+          &::shadow {
+            .toolbar-container {
+              height: 100% !important;
             }
+          }
         }
+
+        &.header-ios ion-toolbar:last-of-type {
+          --border-width: 0;
+        }
+      }
     }
+  }
 }
 
 ion-content.bs-appIntro::part(background) {
-    background-size: cover;
+  background-size: cover;
 }
