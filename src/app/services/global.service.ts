@@ -532,6 +532,10 @@ export class GlobalService {
     return await this.loadingCtrl
       .create({
         message: "<img src='../assets/images/loader.gif' alt='loader'>",
+        spinner: null,
+        showBackdrop: false,
+        mode: 'md',
+
       })
       .then((a) => {
         a.present().then(() => {
