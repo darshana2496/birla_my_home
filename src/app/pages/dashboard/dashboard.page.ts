@@ -1,4 +1,14 @@
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import {
+  AfterContentChecked,
+  AfterContentInit,
+  AfterViewInit,
+  Component,
+  HostListener,
+  OnChanges,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { DomController, IonSlides } from '@ionic/angular';
 import { GlobalService } from 'src/app/services/global.service';
 
@@ -72,11 +82,18 @@ export class DashBoard implements OnInit {
   @ViewChild('content') content: any;
   constructor(
     public globalService: GlobalService,
-    public domCtrl: DomController
+    public domCtrl: DomController,
+    public route: ActivatedRoute
   ) {}
   ngOnInit(): void {
-   
     this.showConstructionProgressDetails = false;
+    this.route.url.subscribe((val) => {
+      console.log('Url is', val);
+    });
+    this.getDetails();
+  }
+
+  getDetails() {
     this.globalService
       .getProjectDetails()
       .then((response: any) => {
@@ -149,9 +166,7 @@ export class DashBoard implements OnInit {
           }, 100);
         }
       })
-      .catch((response: any) => {
-      
-      });
+      .catch((response: any) => {});
   }
 
   viewImage(imgUrl: string): void {

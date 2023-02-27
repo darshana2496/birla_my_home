@@ -35,9 +35,16 @@ export class PagesComponent {
       'ProjectCustomerId',
       projectObj.customerProjectId.toString()
     );
-    this.menuCtrl.close();
 
-    this.router.navigate(['dashboard']);
+    // this.router.navigate(['dashboard']);
+    this.router
+      .navigateByUrl('/dashboard', { skipLocationChange: false })
+      .then(() => {
+        this.router
+          .navigate(['/dashboard'])
+          .then(() => console.log('Dashboard reloaded', this.router.url));
+      });
+    this.menuCtrl.close();
   }
 
   openPage(action: string) {
