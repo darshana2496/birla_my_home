@@ -131,7 +131,7 @@ export class OtpComponent implements OnInit {
                 }
               })
               .catch((response: any) => {});
-
+              console.log(obj,'userdetail')
             this.globalService.customerId = obj.vcCustomerCode;
             this.globalService.addCustomerProjectList(obj);
           } else {
