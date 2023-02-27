@@ -22,6 +22,7 @@ import { ThankYouModalComponent } from '../pages/thank-you-modal/thank-you-modal
 import { AddedProjectSuccessComponent } from '../pages/added-project-success/added-project-success.component';
 import { HTTP } from '@ionic-native/http/ngx';
 import { Checkout } from 'capacitor-razorpay';
+import { EventEmitter } from '@angular/core';
 declare var RazorpayCheckout: any;
 @Injectable({
   providedIn: 'root',
@@ -72,7 +73,7 @@ export class GlobalService {
   notification_count = 0;
   deviceId: any;
   onesignalPlayerId: any;
-
+  eventsample: EventEmitter<any> = new EventEmitter();
   constructor(
     public _http: HttpClient,
     public storage: Storage,
@@ -94,6 +95,9 @@ export class GlobalService {
         });
     });
     return promise;
+  }
+  fireDashboadEvent(){
+    this.eventsample.emit(true);
   }
   vaultBirlaUploads(obj) {
     let promise = new Promise((resolve, reject) => {
