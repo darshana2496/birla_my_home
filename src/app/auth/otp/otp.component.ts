@@ -47,6 +47,7 @@ export class OtpComponent implements OnInit {
       otp: new FormControl('', [Validators.required]),
     });
     this.userDetails = this.globalService.logCustomerDetail;
+    // alert(JSON.stringify(this.userDetails));
     if (this.userDetails && this.userDetails.vcEmail.includes('~')) {
       let email = this.userDetails.vcEmail;
       this.userDetails.vcEmail = email.slice(0, email.lastIndexOf('~'));
@@ -120,7 +121,7 @@ export class OtpComponent implements OnInit {
                   //when user is logged in
                   // this.navCtrl.push("ModalProjectAddSuccessPage", { 'projectObj': obj })
                   // call modal of project added successfully
-                  
+
                   this.globalService.showaddedProjectModal(obj);
                   this.router.navigate(['/enter-pin']);
                   // this.router.navigate(['/add-project']);
@@ -138,9 +139,7 @@ export class OtpComponent implements OnInit {
             this.globalService.issue();
           }
         })
-        .catch((data: any) => {
-         
-        });
+        .catch((data: any) => {});
     }
   }
 
