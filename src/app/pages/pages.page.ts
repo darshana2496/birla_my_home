@@ -26,11 +26,12 @@ export class PagesComponent {
     public menuCtrl: MenuController,
     public router: Router
   ) {}
-
   selectProject(index: number, projectObj: any) {
+    
     this.globalService.customerId = projectObj.customerProjectId.toString(); //used in api calls
     this.globalService.activeSlideIndicator = index;
     this.globalService.selectedProjectObj = projectObj;
+    this.globalService.fireDashboadEvent()
     this.storage.set(
       'ProjectCustomerId',
       projectObj.customerProjectId.toString()

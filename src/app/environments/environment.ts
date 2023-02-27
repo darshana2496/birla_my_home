@@ -4,10 +4,7 @@
 
 export const environment = {
   production: false,
-<<<<<<< HEAD
-=======
   // serverUrl: 'https://portalapi.birlaestates.com/api/',
->>>>>>> a9de7fde213740c3dd7cd3a6def0fe7936d52257
   serverUrl: 'https://portalapiuat.birlaestates.com/api/',
 };
 

@@ -65,7 +65,7 @@ export class AppComponent {
         }
       }
     });
-
+    this.fnSetCustomerIdFromStorage()
     this.platform.ready().then(() => {
       App.addListener('backButton', () => {
         App.exitApp();
@@ -262,5 +262,12 @@ export class AppComponent {
         }
       })
       .catch((response: any) => {});
+  }
+  fnSetCustomerIdFromStorage(){
+    this.globalService
+              .checkAccessPin()
+              .then((response: any) => {
+                console.log(response,'storage')
+              })
   }
 }

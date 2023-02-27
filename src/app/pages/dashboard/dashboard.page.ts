@@ -83,14 +83,25 @@ export class DashBoard implements OnInit {
   constructor(
     public globalService: GlobalService,
     public domCtrl: DomController,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
   ) {}
   ngOnInit(): void {
     this.showConstructionProgressDetails = false;
+  
+    
     this.route.url.subscribe((val) => {
       console.log('Url is', val);
     });
     this.getDetails();
+    this.pageReload()
+  }
+  pageReload(){
+    this.globalService.eventsample.subscribe(x=>{
+      console.log(x);
+      if(x){
+        this.getDetails();
+      }
+    })
   }
 
   getDetails() {
