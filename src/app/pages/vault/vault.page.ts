@@ -45,6 +45,16 @@ export class VaultPage implements OnInit {
     this.activeItemSliding = null;
     this.isSlideOpen = false;
     this.resetListCount();
+    this.pageReload();
+  }
+
+  pageReload() {
+    this.globalService.eventsample.subscribe((x) => {
+      console.log(x);
+      if (x) {
+        this.vaultBirlaUploads();
+      }
+    });
   }
 
   vaultBirlaUploads(): void {
@@ -110,9 +120,7 @@ export class VaultPage implements OnInit {
           this.adminUploadedDocs = [];
         }
       })
-      .catch((response: any) => {
-     
-      });
+      .catch((response: any) => {});
   }
 
   resetListCount() {
@@ -152,8 +160,6 @@ export class VaultPage implements OnInit {
       .then((response: any) => {
         this.globalService.hideLoader();
       })
-      .catch((error: any) => {
-    
-      });
+      .catch((error: any) => {});
   }
 }

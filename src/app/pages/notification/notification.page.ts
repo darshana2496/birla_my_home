@@ -11,6 +11,20 @@ export class NotificationPage implements OnInit {
   notificationList: any = [];
   constructor(public globalService: GlobalService) {}
   ngOnInit(): void {
+    this.getNotification();
+    this.pageReload();
+  }
+
+  pageReload() {
+    this.globalService.eventsample.subscribe((x) => {
+      console.log(x);
+      if (x) {
+        this.getNotification();
+      }
+    });
+  }
+
+  getNotification() {
     this.globalService
       .getNotifications()
       .then((response: any) => {
@@ -23,6 +37,7 @@ export class NotificationPage implements OnInit {
       })
       .catch((response: any) => {});
   }
+
   updateNotification() {
     this.globalService
       .updateCustomerNotification()

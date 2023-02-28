@@ -96,7 +96,7 @@ export class GlobalService {
     });
     return promise;
   }
-  fireDashboadEvent(){
+  fireDashboadEvent() {
     this.eventsample.emit(true);
   }
   vaultBirlaUploads(obj) {
@@ -331,7 +331,7 @@ export class GlobalService {
     let promise = new Promise((resolve, reject) => {
       this._http
         .post(
-          environment.serverUrl + 'v1/config/updatecustomernotification/',
+          environment.serverUrl + 'v1/config/updatecustomernotification',
           obj
         )
         .toPromise()
@@ -535,7 +535,6 @@ export class GlobalService {
         spinner: null,
         showBackdrop: false,
         mode: 'md',
-
       })
       .then((a) => {
         a.present().then(() => {
@@ -580,9 +579,11 @@ export class GlobalService {
   }
 
   checkInternetConnection() {
-    var connectionType = this.network.connectionType;
-    if (connectionType == 'none') {
-      this.route.navigate(['network-check']);
+    if (this.network) {
+      var connectionType = this.network.connectionType;
+      if (connectionType && connectionType == 'none') {
+        this.route.navigate(['network-check']);
+      }
     }
   }
   decrypt(key, ciphertextB64) {

@@ -5,6 +5,7 @@ import {
   IPaymentFutureData,
   IPaymentPendingData,
 } from 'src/app/utilities/constants/commonInterface';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 @Component({
   selector: 'app-payments',
@@ -70,9 +71,18 @@ export class PaymentsPage implements OnInit {
   vcOptIn: any;
   vcOptOut: any;
   disableBtn: boolean;
-  constructor(public globalService: GlobalService, public route: Router) {}
+  constructor(
+    public globalService: GlobalService,
+    public route: Router,
+    public socialShare: SocialSharing
+  ) {}
 
   ngOnInit() {
+    this.getPaymentDetails();
+    this.pageReload();
+  }
+
+  getPaymentDetails() {
     this.globalService
       .getPaymentData()
       .then((response: any) => {
@@ -241,7 +251,49 @@ export class PaymentsPage implements OnInit {
       })
       .catch((response: any) => {});
   }
-  shareFile() {}
+
+  pageReload() {
+    this.globalService.eventsample.subscribe((x) => {
+      console.log(x);
+      if (x) {
+        this.getPaymentDetails();
+      }
+    });
+  }
+
+  shareFile(obj) {
+    let data =
+      'Amount of Rs ' +
+      obj.vcAmountpaid +
+      ' paid towards ' +
+      obj.vcPaymentTowards +
+      ' on ' +
+      obj.vcPaymentDate +
+      ' via ' +
+      obj.vcPaymentMode +
+      '. Payment details: ' +
+      obj.vcChequeDetail +
+      '. Bank details: ' +
+      obj.vcBankDetail;
+    console.log(data);
+    // let obj =
+    // {
+    //   "vcPaymentDate": "01 Jan 2019",
+    //   "vcAmountpaid": "500000",
+    //   "vcPaymentMode": "20190117",
+    //   "vcBankDetail": null,
+    //   "vcPaymentTowards": "Installment Amount",
+    //   "vcChequeDetail": "1234"
+    // }
+    this.socialShare
+      .share(data, null, null, null)
+      .then((response: any) => {
+        console.log('share data', response);
+      })
+      .catch((error: any) => {
+        console.log(error);
+      });
+  }
   dropCheque() {
     this.route.navigate(['/cheque-drop']);
   }

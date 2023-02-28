@@ -18,7 +18,7 @@ import { App } from '@capacitor/app';
 import { Storage } from '@ionic/storage-angular';
 import { GlobalService } from './services/global.service';
 import OneSignal from 'onesignal-cordova-plugin';
-import { map, timer } from 'rxjs';
+import { map, Subscription, timer } from 'rxjs';
 import { Device } from '@awesome-cordova-plugins/device/ngx';
 import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 
@@ -31,7 +31,7 @@ export class AppComponent {
   @ViewChild('myNav') nav: NavController;
 
   rootPage: string;
-  timerSubscription: any;
+  timerSubscription: Subscription;
   exitAppCount: number = 0;
 
   constructor(
@@ -65,7 +65,6 @@ export class AppComponent {
         }
       }
     });
-    this.fnSetCustomerIdFromStorage()
     this.platform.ready().then(() => {
       App.addListener('backButton', () => {
         App.exitApp();
@@ -82,9 +81,6 @@ export class AppComponent {
           }
         });
       }
-
-      // this.globalService.deviceId = this.device.uuid;
-
       this.OneSignalInit();
 
       this.globalService.network = Network.getStatus()
@@ -97,97 +93,19 @@ export class AppComponent {
       ``;
 
       this.globalService.getNetworkCarrierInfo();
-
-      storage.get('AccessPin').then((val) => {
-        this.setInitialPage(val);
-      });
-
-     
-      // platform.backButton.subscribe((event) => {
-      //   alert(event);
-      //   let menuBarOpen = this.menuCtrl.isOpen();
-
-      //   this.popoverController
-      //     .getTop()
-      //     .then((popover) => {
-      //       return this.popoverController.dismiss();
-      //     })
-      //     .catch((e) => console.log(e));
-      //   this.modalCtrl
-      //     .getTop()
-      //     .then((modal) => {
-      //       return this.modalCtrl.dismiss();
-      //     })
-      //     .catch((e) => console.log(e));
-      //   this.loadingController
-      //     .getTop()
-      //     .then((loading) => {
-      //       return this.loadingController.dismiss();
-      //     })
-      //     .catch((e) => console.log(e));
-      //   this.toastController
-      //     .getTop()
-      //     .then((toast) => {
-      //       return this.toastController.dismiss();
-      //     })
-      //     .catch((e) => console.log(e));
-      //   this.exitAppCount++;
-      //   if (this.routerOutlet && !this.routerOutlet.canGoBack()) {
-      //     if (this.exitAppCount > 1) {
-      //       App.exitApp();
-      //     }
-      //   }
-
-      //   if (menuBarOpen) {
-      //     this.menuCtrl.close();
-      //     this.exitAppCount = 0;
-      //   } else {
-      //     if (this.routerOutlet && !this.routerOutlet.canGoBack()) {
-      //       const tabsNav = this.ionTab.outlet.getContext();
-      //       // if (tabsNav != null) {
-      //       //   if (tabsNav.getSelected().index != 0) {
-      //       //       this.exitAppCount = 0;
-      //       //       tabsNav.select(0);
-      //       //       return;
-      //       //   }
-      //       // }
-
-      //       this.exitAppCount++;
-      //       if (this.exitAppCount > 1) {
-      //         App.exitApp();
-      //       } else {
-      //         // this.globalService.showToastMessage(
-      //         //     "Press again to exit",
-      //         //     1000,
-      //         //     "bottom"
-      //         // );
-      //       }
-      //     } else {
-      //       this.exitAppCount = 0;
-      //       if (this.globalService.currentlyActivePage == '/network-check') {
-      //         // if (this.globalService.currentlyActivePage == "NetworkCheckPage") {
-      //         this.globalService.checkInternetConnection();
-      //       } else if (
-      //         this.globalService.currentlyActivePage ==
-      //         'payment-gateway-response'
-      //       ) {
-      //         // } else if (this.globalService.currentlyActivePage == "PaymentGatewayResponsePage") {
-      //         this.router.navigate(['/loginwithcustid']);
-      //       } else {
-      //         this.nav.pop();
-      //       }
-      //     }
-      //   }
-      // });
-
-      this.timerSubscription = timer(0, 30000)
+    });
+    storage.get('AccessPin').then((val) => {
+      this.setInitialPage(val);
+    });
+    if (this.globalService.customerId) {
+      this.timerSubscription = timer(0, 10000)
         .pipe(
           map(() => {
             this.getNotificationCount();
           })
         )
         .subscribe();
-    });
+    }
   }
 
   ngOnDestroy() {
@@ -197,7 +115,6 @@ export class AppComponent {
   setInitialPage(pin: any): void {
     this.globalService.setInitialProject(); //used to get list of customerProjects added and get if isAppReviewd
     if (pin != null) {
-  
       this.router.navigate(['enter-pin']);
     } else {
       this.storage.get('FirstTimeAppLoad').then((val) => {
@@ -262,12 +179,5 @@ export class AppComponent {
         }
       })
       .catch((response: any) => {});
-  }
-  fnSetCustomerIdFromStorage(){
-    this.globalService
-              .checkAccessPin()
-              .then((response: any) => {
-                console.log(response,'storage')
-              })
   }
 }
