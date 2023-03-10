@@ -15,7 +15,10 @@ export class PagesComponent {
   slideOpts = {
     initialSlide: 0,
     slidesPerView: 2,
+    loop: false,
+    mode: 'md',
     coverflowEffect: {
+      maxBackfaceHiddenSlides: 2,
       depth: 0,
     },
   };
@@ -27,11 +30,10 @@ export class PagesComponent {
     public router: Router
   ) {}
   selectProject(index: number, projectObj: any) {
-    
     this.globalService.customerId = projectObj.customerProjectId.toString(); //used in api calls
     this.globalService.activeSlideIndicator = index;
     this.globalService.selectedProjectObj = projectObj;
-    this.globalService.fireDashboadEvent()
+    this.globalService.fireDashboadEvent();
     this.storage.set(
       'ProjectCustomerId',
       projectObj.customerProjectId.toString()
