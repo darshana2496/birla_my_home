@@ -154,7 +154,6 @@ export class AppComponent {
     OneSignal.setAppId('c7280583-04a1-4799-ab34-c8590c0b4833');
     OneSignal.setNotificationOpenedHandler((jsonData) => {
       console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
-      // alert(JSON.stringify(jsonData));
     });
 
     // Prompts the user for notification permissions.
