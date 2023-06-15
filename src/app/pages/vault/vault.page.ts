@@ -8,8 +8,6 @@ import {
   ITdsDocuments,
   IVaultDocumentType,
 } from 'src/app/utilities/constants/commonInterface';
-import { Share } from '@capacitor/share';
-import { Directory, Filesystem } from '@capacitor/filesystem';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 @Component({

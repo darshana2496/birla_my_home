@@ -23,6 +23,7 @@ import { AddedProjectSuccessComponent } from '../pages/added-project-success/add
 import { HTTP } from '@ionic-native/http/ngx';
 import { Checkout } from 'capacitor-razorpay';
 import { EventEmitter } from '@angular/core';
+import { Network } from '@capacitor/network';
 declare var RazorpayCheckout: any;
 @Injectable({
   providedIn: 'root',
@@ -578,11 +579,12 @@ export class GlobalService {
     return promise;
   }
 
-  checkInternetConnection() {
+  async checkInternetConnection() {
+    this.network = await Network.getStatus();
     if (this.network) {
-      var connectionType = this.network.connectionType;
-      if (connectionType && connectionType == 'none') {
-        this.route.navigate(['network-check']);
+      var connected = this.network.connected;
+      if (!connected) {
+        this.route.navigate(['/network-check']);
       }
     }
   }

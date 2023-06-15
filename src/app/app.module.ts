@@ -16,16 +16,14 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { HTTP } from '@ionic-native/http/ngx';
+import { NetworkCheckComponent } from './common-components/network-check/network-check.component';
+import { ErrorHandlerPageComponent } from './common-components/error-handler-page/error-handler-page.component';
+import { CommonComponentsModule } from './common-components/common-components.module';
 @NgModule({
-  declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    IonicModule.forRoot(),
-    AppRoutingModule,
-    HttpClientModule,
-    IonicStorageModule.forRoot(),
-    ReactiveFormsModule,
-    FormsModule,
+  declarations: [
+    AppComponent,
+    NetworkCheckComponent,
+    ErrorHandlerPageComponent,
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
@@ -38,5 +36,15 @@ import { HTTP } from '@ionic-native/http/ngx';
     HTTP,
   ],
   bootstrap: [AppComponent],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    HttpClientModule,
+    IonicStorageModule.forRoot(),
+    ReactiveFormsModule,
+    FormsModule,
+    CommonComponentsModule,
+  ],
 })
 export class AppModule {}

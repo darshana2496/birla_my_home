@@ -5,13 +5,15 @@ import {
   HttpEvent,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, from, tap, catchError, finalize } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { catchError, finalize } from 'rxjs/operators';
 import { GlobalService } from '../services/global.service';
 import { HttpHeaders } from '@angular/common/http';
 import { environment } from '../environments/environment';
+import { Router } from '@angular/router';
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-  constructor(public globalService: GlobalService) {}
+  constructor(public globalService: GlobalService, public router: Router) {}
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
@@ -64,15 +66,23 @@ export class JwtInterceptor implements HttpInterceptor {
       catchError((error: any) => {
         if (
           error.status == 401 ||
-          error.status == 0 ||
           error.status == 500 ||
           error.status == 400 ||
-          error.status == 404
+          error.status == 404 ||
+          error.status == 0
         ) {
           this.globalService.hideLoader();
-        }
-        if (error.status == 0) {
-          this.globalService.checkInternetConnection();
+          this.router.navigate(['error']);
+        } else {
+          // this.router.navigate(['error']);
+          this.globalService
+            .checkInternetConnection()
+            .then((val) => {
+              this.globalService.hideLoader();
+            })
+            .catch((e) => {
+              console.log(e);
+            });
         }
 
         return of(error);

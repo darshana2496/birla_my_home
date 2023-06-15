@@ -1,13 +1,20 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 33
+  signingConfigs {
+    birla_keystore {
+      storePassword 'Birla'
+      keyAlias 'Birla'
+      keyPassword 'Birla'
+    }
+  }
+  compileSdkVersion 33
     defaultConfig {
         applicationId "io.birla.myhome"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion 33
-        versionCode 1
-        versionName "1.0"
+        versionCode 110
+        versionName "0.1.5"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.

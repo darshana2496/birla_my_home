@@ -7,14 +7,8 @@ import { AssetsPreviewComponent } from './assets-preview/assets-preview.componen
 import { HeaderComponent } from './header/header.component';
 
 @NgModule({
-    declarations: [
-        HeaderComponent,
-        AddressInfoComponent,AssetsPreviewComponent
-    ],
-    imports: [IonicModule, CommonModule, FormsModule],
-    exports: [
-        HeaderComponent,
-        AddressInfoComponent,AssetsPreviewComponent
-    ]
-  })
-  export class CommonComponentsModule {}
+  declarations: [HeaderComponent, AddressInfoComponent, AssetsPreviewComponent],
+  imports: [IonicModule, CommonModule, FormsModule],
+  exports: [HeaderComponent, AddressInfoComponent, AssetsPreviewComponent],
+})
+export class CommonComponentsModule {}

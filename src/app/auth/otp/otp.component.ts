@@ -7,7 +7,8 @@ import {
 import { GlobalService } from 'src/app/services/global.service';
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { map, Observable, Subject, takeUntil, timer } from 'rxjs';
+import { Observable, Subject, timer } from 'rxjs';
+import { takeUntil, map } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Device } from '@awesome-cordova-plugins/device/ngx';
 import { Storage } from '@ionic/storage-angular';
@@ -132,9 +133,8 @@ export class OtpComponent implements OnInit {
                 }
               })
               .catch((response: any) => {});
-            this.globalService.customerId = obj.vcCustomerCode;            
+            this.globalService.customerId = obj.vcCustomerCode;
             this.globalService.addCustomerProjectList(obj);
-            
           } else {
             this.globalService.issue();
           }

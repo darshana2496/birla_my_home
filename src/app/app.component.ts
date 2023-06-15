@@ -18,9 +18,10 @@ import { App } from '@capacitor/app';
 import { Storage } from '@ionic/storage-angular';
 import { GlobalService } from './services/global.service';
 import OneSignal from 'onesignal-cordova-plugin';
-import { map, Subscription, timer } from 'rxjs';
+import { Subscription, timer } from 'rxjs';
 import { Device } from '@awesome-cordova-plugins/device/ngx';
 import { Diagnostic } from '@ionic-native/diagnostic/ngx';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -53,7 +54,6 @@ export class AppComponent {
     this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationEnd) {
         this.globalService.currentlyActivePage = event.url;
-        this.globalService.checkInternetConnection();
 
         if (!this.globalService.isAppReviewed) {
           if (
@@ -62,6 +62,16 @@ export class AppComponent {
           ) {
             this.showUserFeedbackPage();
           }
+        }
+
+        if (this.globalService.customerId) {
+          this.timerSubscription = timer(0, 10000)
+            .pipe(
+              map(() => {
+                this.getNotificationCount();
+              })
+            )
+            .subscribe();
         }
       }
     });
@@ -82,30 +92,31 @@ export class AppComponent {
         });
       }
       this.OneSignalInit();
-
-      this.globalService.network = Network.getStatus()
-        .then((val) => {
-          return val;
-        })
-        .catch((err) => {
-          return null;
-        });
-      ``;
-
-      this.globalService.getNetworkCarrierInfo();
     });
-    storage.get('AccessPin').then((val) => {
-      this.setInitialPage(val);
-    });
-    if (this.globalService.customerId) {
-      this.timerSubscription = timer(0, 10000)
-        .pipe(
-          map(() => {
-            this.getNotificationCount();
-          })
-        )
-        .subscribe();
-    }
+
+    this.globalService
+      .checkInternetConnection()
+      .then((value) => {
+        if (
+          this.globalService.network &&
+          this.globalService.network.connected
+        ) {
+          this.globalService
+            .getNetworkCarrierInfo()
+            .then((val) => {
+              const iPaddress = val;
+            })
+            .catch((e) => {
+              console.log(e);
+            });
+          storage.get('AccessPin').then((val) => {
+            this.setInitialPage(val);
+          });
+        }
+      })
+      .catch((e) => {
+        alert('Exception occured');
+      });
   }
 
   ngOnDestroy() {
@@ -128,7 +139,7 @@ export class AppComponent {
   }
 
   async showUserFeedbackPage() {
-    this.globalService.getUserfeedback().then((data) => {
+    this.globalService.getUserfeedback().then((data: number) => {
       if (data < 50 && data > 47) {
         switch (this.globalService.currentlyActivePage) {
           case '/set-pin':

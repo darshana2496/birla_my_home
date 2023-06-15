@@ -1,0 +1,22 @@
+<app-header
+  class="typ-transparent"
+  [type]="'normal'"
+  [typeTitle]="'logo'"
+></app-header>
+
+<ion-content
+  [fullscreen]="true"
+  class="ion-center ion-text-center ion-padding lyt-section typ-bg"
+>
+  <div class="content-inner lyt-section typ-bg">
+    <div class="inner-page-content bs-title-desc">
+      <h6 class="sub-title">
+        Oops! We're sorry, but our server is currently experiencing technical
+        difficulties. Please try again later.
+      </h6>
+      <ion-button class="app-btn btn-default retry-btn" (click)="retry()"
+        >Retry</ion-button
+      >
+    </div>
+  </div>
+</ion-content>

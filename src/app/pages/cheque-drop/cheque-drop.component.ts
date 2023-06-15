@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Share } from '@capacitor/share';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { GlobalService } from 'src/app/services/global.service';
 
@@ -11,7 +10,10 @@ import { GlobalService } from 'src/app/services/global.service';
 export class ChequeDropComponent implements OnInit {
   dropLocationList: any = [];
   serverResponseMsg: string;
-  constructor(public globalService: GlobalService, public socialShare: SocialSharing) { }
+  constructor(
+    public globalService: GlobalService,
+    public socialShare: SocialSharing
+  ) {}
 
   ngOnInit() {
     this.globalService
@@ -24,20 +26,17 @@ export class ChequeDropComponent implements OnInit {
           this.serverResponseMsg = response.vcDescription;
         }
       })
-      .catch((response: any) => {
-       
-      });
+      .catch((response: any) => {});
   }
   share(data) {
     let obj =
       'Location: ' + data.vcLocation + '. Description: ' + data.vcDescription;
-      this.globalService.showLoader();
+    this.globalService.showLoader();
     this.socialShare
       .share(obj, data.vcName, null, null)
       .then((response: any) => {
-          this.globalService.hideLoader();
+        this.globalService.hideLoader();
       })
-      .catch((error: any) => {
-      });
+      .catch((error: any) => {});
   }
 }
