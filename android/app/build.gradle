@@ -8,12 +8,12 @@ android {
       keyPassword 'Birla'
     }
   }
-  compileSdkVersion 33
+  compileSdkVersion 31
     defaultConfig {
         applicationId "io.birla.myhome"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion 33
-        versionCode 110
+        versionCode 111
         versionName "0.1.5"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {

@@ -18,7 +18,10 @@
       </div>
     </div>
 
-    <div class="bs-slider typ-menu">
+    <div
+      class="bs-slider typ-menu"
+      *ngIf="globalService.projectList && globalService.projectList.length"
+    >
       <ion-slides #slides [pager]="false" [options]="slideOpts">
         <ion-slide></ion-slide>
         <ion-slide

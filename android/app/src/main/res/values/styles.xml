@@ -18,5 +18,13 @@
 
     <style name="AppTheme.NoActionBarLaunch" parent="Theme.SplashScreen">
         <item name="android:background">@drawable/splash</item>
+
+        <!-- Set the splash screen background, animated icon, and animation duration. -->
+        <item name="windowSplashScreenBackground">@color/purple_200</item>
+
+        <!-- Use windowSplashScreenAnimatedIcon to add either a drawable or an
+                animated drawable. One of these is required. -->
+        <!-- <item name="windowSplashScreenAnimatedIcon">@drawable/splash</item> -->
+
     </style>
 </resources>

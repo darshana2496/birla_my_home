@@ -16,6 +16,7 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
   styleUrls: ['vault.page.scss'],
 })
 export class VaultPage implements OnInit {
+  CustomerSegment: string = 'documents';
   customTabs: string;
   disableBtn: boolean = true;
   isSwiperOpen: boolean = false;
@@ -23,6 +24,7 @@ export class VaultPage implements OnInit {
   current = 100;
   myUploadSearch: string;
   searchText: string = '';
+  searchHandoverText: string = '';
   activeItemSliding: IonItemSliding = null;
   isSlideOpen: Boolean = false;
   adminUploadedDocs: ITdsDocuments[] = [];
@@ -32,6 +34,7 @@ export class VaultPage implements OnInit {
     { name: 'Payment Receipts', count: 0, documentList: '' },
     { name: 'Other Property Letters', count: 0, documentList: '' },
   ];
+  adminHandoverDocs: any;
   constructor(
     public globalService: GlobalService,
     public route: Router,
@@ -69,29 +72,36 @@ export class VaultPage implements OnInit {
     this.globalService
       .vaultBirlaUploads(obj)
       .then((response: any) => {
-        if (response.btIsSuccess) {
-          this.adminUploadedDocs = response.object;
+        if (
+          response.btIsSuccess &&
+          response.object &&
+          response.object.subPkgDocumentList &&
+          response.object.subPkgHandoverDocumentList
+        ) {
+          this.adminUploadedDocs = response.object.subPkgDocumentList;
+          this.adminHandoverDocs = response.object.subPkgHandoverDocumentList;
 
           //if (this.globalService.tdsFilterObject.documentType == "") {
-          for (let i = 0; i < response.object.length; i++) {
+          for (let i = 0; i < response.object.subPkgDocumentList.length; i++) {
             let decryptVcType = this.globalService.decrypt(
               this.globalService.encryptSecretKey,
-              response.object[i].vcType
+              response.object.subPkgDocumentList[i].vcType
             );
             let decryptvcFilename = this.globalService.decrypt(
               this.globalService.encryptSecretKey,
-              response.object[i].vcFilename
+              response.object.subPkgDocumentList[i].vcFilename
             );
             let decryptvcFileURL = this.globalService.decrypt(
               this.globalService.encryptSecretKey,
-              response.object[i].vcFileUrl
+              response.object.subPkgDocumentList[i].vcFileUrl
             );
 
-            response.object[i].vcType = decryptVcType;
-            response.object[i].vcFilename = decryptvcFilename;
-            response.object[i].vcFileUrl = decryptvcFileURL;
+            response.object.subPkgDocumentList[i].vcType = decryptVcType;
+            response.object.subPkgDocumentList[i].vcFilename =
+              decryptvcFilename;
+            response.object.subPkgDocumentList[i].vcFileUrl = decryptvcFileURL;
 
-            let obj = response.object[i];
+            let obj = response.object.subPkgDocumentList[i];
             let count = -1;
             for (let j = 0; j < this.staticVaultList.length; j++) {
               const element = this.staticVaultList[j];
@@ -114,8 +124,59 @@ export class VaultPage implements OnInit {
               this.staticVaultList.push(newStaticVal);
             }
           }
+
+          // handover docs decryption
+          for (
+            let i = 0;
+            i < response.object.subPkgHandoverDocumentList.length;
+            i++
+          ) {
+            let decryptVcType = this.globalService.decrypt(
+              this.globalService.encryptSecretKey,
+              response.object.subPkgHandoverDocumentList[i].vcType
+            );
+            let decryptvcFilename = this.globalService.decrypt(
+              this.globalService.encryptSecretKey,
+              response.object.subPkgHandoverDocumentList[i].vcFilename
+            );
+            let decryptvcFileURL = this.globalService.decrypt(
+              this.globalService.encryptSecretKey,
+              response.object.subPkgHandoverDocumentList[i].vcFileUrl
+            );
+
+            response.object.subPkgHandoverDocumentList[i].vcType =
+              decryptVcType;
+            response.object.subPkgHandoverDocumentList[i].vcFilename =
+              decryptvcFilename;
+            response.object.subPkgHandoverDocumentList[i].vcFileUrl =
+              decryptvcFileURL;
+
+            // let obj = response.object.subPkgHandoverDocumentList[i];
+            // let count = -1;
+            // for (let j = 0; j < this.staticVaultList.length; j++) {
+            //   const element = this.staticVaultList[j];
+
+            //   if (element.name == obj.vcType) {
+            //     count = i;
+            //     element.count += 1;
+            //     let newObj = obj.vcFilename + ' ';
+            //     element.documentList += element.documentList + newObj;
+            //   }
+            // }
+            // if (count == -1) {
+            //   //new type other then the three static onces
+            //   let newObj = obj.vcFilename;
+            //   let newStaticVal = {
+            //     name: obj.vcType,
+            //     count: 1,
+            //     documentList: newObj,
+            //   };
+            //   this.staticVaultList.push(newStaticVal);
+            // }
+          }
         } else {
           this.adminUploadedDocs = [];
+          this.adminHandoverDocs = [];
         }
       })
       .catch((response: any) => {});
@@ -146,6 +207,32 @@ export class VaultPage implements OnInit {
       docsData.fileType = 'png';
       docsData['isDownloaded'] = false;
       this.route.navigate(['/asset-preview'], docsData);
+    }
+  }
+
+  async viewHandoverDocs(docsData) {
+    console.log('docs', docsData);
+    if (docsData.vcFileUrl.includes('.pdf')) {
+      let options = 'zoom=no,closebuttoncaption=Close,closebuttoncolor=#000000';
+      await Browser.open({ url: docsData.vcFileUrl });
+    }
+    if (docsData.vcFileUrl.includes('.xls')) {
+      let options = 'zoom=no,closebuttoncaption=Close,closebuttoncolor=#000000';
+      await Browser.open({ url: docsData.vcFileUrl });
+    }
+    if (docsData.vcFileUrl.includes('.doc')) {
+      let options = 'zoom=no,closebuttoncaption=Close,closebuttoncolor=#000000';
+      await Browser.open({ url: docsData.vcFileUrl });
+    }
+
+    if (
+      docsData.vcFileUrl.includes('.jpg') ||
+      docsData.vcFileUrl.includes('.JPG') ||
+      docsData.vcFileUrl.includes('.png') ||
+      docsData.vcFileUrl.includes('.PNG')
+    ) {
+      docsData['isDownloaded'] = false;
+      this.globalService.previewImage(docsData.vcFileUrl);
     }
   }
 

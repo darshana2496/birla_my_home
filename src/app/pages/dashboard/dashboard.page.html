@@ -102,14 +102,12 @@
                   </div>
                 </ion-col>
               </ion-row>
-             
             </ion-grid>
           </div>
           <h3 class="title">Life that awaits you</h3>
         </div>
       </div>
-      
-     
+
       <div class="bs-slider typ-project" *ngIf="projectStages.length">
         <ion-slides pager="false" [options]="slideOpts2">
           <ion-slide *ngFor="let blog of blogsList">
@@ -129,7 +127,7 @@
 
       <!-- construction section -->
       <div class="lyt-construction">
-        <h3 class="title" *ngIf="projectStages.length">
+        <h3 class="title" *ngIf="projectStages && projectStages.length">
           Construction progress
         </h3>
 
@@ -198,6 +196,28 @@
             <!-- <p class="slide-desc">{{constructionVideoList.vcDescription}}</p> -->
           </div>
         </div>
+      </div>
+
+      <!-- Unit images section -->
+      <div class="lyt-construction">
+        <h3 class="title" *ngIf="unitImages && unitImages.length">
+          Unit Images
+        </h3>
+
+        <ion-slides
+          #UnitImagesSlides
+          class="tabs-list"
+          pager="false"
+          [options]="slideOpts4"
+        >
+          <ion-slide *ngFor="let unitItem of unitImages;let i=index">
+            <div class="tab-btn" (click)="viewImage(unitItem.vcShortFileUrl)">
+              <div class="bs-icon-desc typ-construct">
+                <img [src]="unitItem.vcShortFileUrl" class="unit-img" />
+              </div>
+            </div>
+          </ion-slide>
+        </ion-slides>
       </div>
 
       <!-- your dream home section -->

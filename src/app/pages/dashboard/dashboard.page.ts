@@ -77,9 +77,21 @@ export class DashBoard implements OnInit {
     },
   };
 
+  slideOpts4 = {
+    slidesPerView: 3,
+    coverflowEffect: {
+      rotate: 50,
+      stretch: 0,
+      depth: 100,
+      modifier: 1,
+      slideShadows: true,
+    },
+  };
+
   @ViewChild(IonSlides) slides: IonSlides;
   @ViewChild('ProjectStagesSlides') ProjectStagesSlides: IonSlides;
   @ViewChild('content') content: any;
+  unitImages: any;
   constructor(
     public globalService: GlobalService,
     public domCtrl: DomController,
@@ -110,6 +122,7 @@ export class DashBoard implements OnInit {
 
           this.projectName = obj.vcName;
           this.projectImages = obj.customerProjectDetail_ImagesList;
+          this.unitImages = obj.customerProjectDetail_UnitImagesList;
           this.floorPlanImg = obj.vcUnitLayout;
 
           this.apartmentType = obj.vcUnitType;

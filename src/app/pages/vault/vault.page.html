@@ -13,63 +13,132 @@
     </ion-fab-list>
   </ion-fab>
   <div class="content-inner">
-    <div class="lyt-upload" style="padding: 16px">
-      <div class="head">
-        <div class="search-bar">
-          <ion-item lines="none" class="app-form-group">
-            <ion-label class="app-field-label"
-              ><span class="icon icon-search"></span
-            ></ion-label>
-            <ion-input
-              class="app-form-control"
-              type="text"
-              placeholder="Search"
-              [(ngModel)]="searchText"
-            ></ion-input>
-          </ion-item>
-        </div>
-      </div>
+    <div class="content no-padding app-tab">
+      <ion-segment [(ngModel)]="CustomerSegment" class="app-tab-nav">
+        <ion-segment-button value="documents" class="app-tab-nav-item">
+          Documents
+        </ion-segment-button>
+        <ion-segment-button value="handoverDocs" class="app-tab-nav-item">
+          Handover Documents
+        </ion-segment-button>
+      </ion-segment>
 
-      <div class="cont">
-        <div class="document-list">
-          <ion-list class="card-list">
-          <div
-            class="bs-doc"
-            *ngFor="let adminDocs of adminUploadedDocs | searchFilterPipe :searchText;let i=index"
-          >
-            <ion-item-sliding #slidingItem>
-              <ion-item
-                lines="none"
-                class="iconwithtext"
-                (click)="viewDocs(adminDocs)"
-              >
-                <div class="icon">
-                  <img
-                    src="../../../assets/images/customer-portal_TDS.svg"
-                    alt="customer-portal_TDS"/>
-                </div>
-                <div class="text">
-                  <h2 class="title">{{adminDocs.vcFilename}}</h2>
-                  <h3 class="time-stamp">
-                    uploaded on {{adminDocs.vcUploadedOn}}
-                  </h3>
-                </div>
+      <div [ngSwitch]="CustomerSegment" class="tab-content app-tab-content">
+        <div *ngSwitchCase="'documents'">
+          <div class="head">
+            <div class="search-bar">
+              <ion-item lines="none" class="app-form-group">
+                <ion-label class="app-field-label"
+                  ><span class="icon icon-search"></span
+                ></ion-label>
+                <ion-input
+                  class="app-form-control"
+                  type="text"
+                  placeholder="Search"
+                  [(ngModel)]="searchText"
+                ></ion-input>
               </ion-item>
-              <ion-item-options side="end" class="act-wrap">
-                <ion-button
-                  class="app-btn btn-icon"
-                  (click)="shareDoc(adminDocs)">
-                  <ion-icon name="share-social-outline"></ion-icon>
-                </ion-button>
-              </ion-item-options>
-            </ion-item-sliding>
+            </div>
           </div>
-          <div
-            class="ion-text-left"
-            *ngIf="(adminUploadedDocs | searchFilterPipe :searchText).length === 0 || !adminUploadedDocs.length">
-            No documents found.
+
+          <div class="cont">
+            <div class="document-list">
+              <ion-list class="card-list">
+                <div
+                  class="bs-doc"
+                  *ngFor="let adminDocs of adminUploadedDocs | searchFilterPipe :searchText;let i=index"
+                >
+                  <ion-item-sliding #slidingItem>
+                    <ion-item
+                      lines="none"
+                      class="iconwithtext"
+                      (click)="viewDocs(adminDocs)"
+                    >
+                      <div class="icon">
+                        <img
+                          src="../../../assets/images/customer-portal_TDS.svg"
+                          alt="customer-portal_TDS"
+                        />
+                      </div>
+                      <div class="text">
+                        <h2 class="title">{{adminDocs.vcFilename}}</h2>
+                        <h3 class="time-stamp">
+                          uploaded on {{adminDocs.vcUploadedOn}}
+                        </h3>
+                      </div>
+                    </ion-item>
+                    <ion-item-options side="end" class="act-wrap">
+                      <ion-button
+                        class="app-btn btn-icon"
+                        (click)="shareDoc(adminDocs)"
+                      >
+                        <ion-icon name="share-social-outline"></ion-icon>
+                      </ion-button>
+                    </ion-item-options>
+                  </ion-item-sliding>
+                </div>
+                <div
+                  class="ion-text-left"
+                  *ngIf="(adminUploadedDocs | searchFilterPipe :searchText).length === 0 || !adminUploadedDocs.length"
+                >
+                  No documents found.
+                </div>
+              </ion-list>
+            </div>
           </div>
-        </ion-list>
+        </div>
+        <div *ngSwitchCase="'handoverDocs'">
+          <div class="head">
+            <div class="search-bar">
+              <ion-item lines="none" class="app-form-group">
+                <ion-label class="app-field-label"
+                  ><span class="icon icon-search"></span
+                ></ion-label>
+                <ion-input
+                  class="app-form-control"
+                  type="text"
+                  placeholder="Search"
+                  [(ngModel)]="searchHandoverText"
+                ></ion-input>
+              </ion-item>
+            </div>
+          </div>
+
+          <div class="cont">
+            <div class="document-list">
+              <ion-list class="card-list">
+                <div
+                  class="bs-doc"
+                  *ngFor="let handoverDocs of adminHandoverDocs | searchFilterPipe :searchHandoverText;let i=index"
+                >
+                  <ion-item
+                    lines="none"
+                    class="iconwithtext"
+                    (click)="viewHandoverDocs(handoverDocs)"
+                  >
+                    <div class="icon">
+                      <img
+                        src="../../../assets/images/customer-portal_TDS.svg"
+                        alt="customer-portal_TDS"
+                      />
+                    </div>
+                    <div class="text">
+                      <h2 class="title">{{handoverDocs.vcFilename}}</h2>
+                      <h3 class="time-stamp">
+                        uploaded on {{handoverDocs.vcUploadedOn}}
+                      </h3>
+                    </div>
+                  </ion-item>
+                </div>
+                <div
+                  class="ion-text-left"
+                  *ngIf="(adminHandoverDocs | searchFilterPipe :searchHandoverText).length === 0 || !adminHandoverDocs.length"
+                >
+                  No documents found.
+                </div>
+              </ion-list>
+            </div>
+          </div>
         </div>
       </div>
     </div>
