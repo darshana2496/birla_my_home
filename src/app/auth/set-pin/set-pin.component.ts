@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GlobalService } from 'src/app/services/global.service';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
+import { Keyboard } from '@capacitor/keyboard';
 @Component({
   selector: 'app-set-pin',
   templateUrl: './set-pin.component.html',
@@ -74,7 +75,11 @@ export class SetPinComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    Keyboard.addListener('keyboardDidShow', info => {
+      Keyboard.setAccessoryBarVisible({isVisible: true});
+    });
+  }
   get firstGroup() {
     return (this.pinGroup.get('firstPin') as FormGroup).controls;
   }
@@ -96,11 +101,14 @@ export class SetPinComponent implements OnInit {
   }
 
   fnsetPin() {
-    this.globalService.setPinValue = this.setfirstPin.toString();
-    this.storage.set('AccessPin', this.globalService.setPinValue);
-    this.globalService.setInitialProject();
-    this.globalService.isPhoneUnlocked = true;
-    this.route.navigate(['/dashboard']);
+    if(this.submitted){
+      this.globalService.setPinValue = this.setfirstPin.toString();
+      this.storage.set('AccessPin', this.globalService.setPinValue);
+      this.globalService.setInitialProject();
+      this.globalService.isPhoneUnlocked = true;
+      this.route.navigate(['/dashboard']);
+    }
+   
   }
 
   toggleInputType(formControl, nextid, prevId) {
@@ -111,4 +119,6 @@ export class SetPinComponent implements OnInit {
       return 'password';
     }
   }
+
+  
 }

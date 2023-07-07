@@ -22,6 +22,7 @@ import { Subscription, timer } from 'rxjs';
 import { Device } from '@awesome-cordova-plugins/device/ngx';
 import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { map } from 'rxjs/operators';
+import { HTTP } from '@ionic-native/http/ngx';
 
 @Component({
   selector: 'app-root',
@@ -47,6 +48,7 @@ export class AppComponent {
     public popoverController: PopoverController,
     public loadingController: LoadingController,
     public toastController: ToastController,
+    public _httpnative: HTTP,
     @Optional() public routerOutlet: IonRouterOutlet,
     @Optional() public ionTab: IonTabs
   ) {
@@ -91,6 +93,7 @@ export class AppComponent {
           }
         });
       }
+    this._httpnative.setDataSerializer("json");
       this.OneSignalInit();
     });
 

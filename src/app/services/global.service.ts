@@ -789,7 +789,6 @@ export class GlobalService {
   }
 
   makePayment(outstandingAmount: number) {
-    console.log('outstandingAmount', outstandingAmount);
     let promise = new Promise((resolve, reject) => {
       this._http
         .get(this.urls + 'Payment/getpaymentdetail/' + this.customerId)
@@ -813,9 +812,10 @@ export class GlobalService {
   generateRazorPayOrderId(saleOrderNo: string, outstandingPaymentAmt: number) {
     let userNamePwd =
       this.razorPayAuth.vcKeyId + ':' + this.razorPayAuth.vcKeySecret;
+      
 
     let obj = {
-      amount: outstandingPaymentAmt * 100,
+      amount: (outstandingPaymentAmt * 100),
       currency: 'INR',
       receipt: saleOrderNo,
     };
@@ -824,20 +824,28 @@ export class GlobalService {
       'Content-Type': 'application/json',
       Authorization: 'Basic ' + btoa(userNamePwd),
     };
+
+
     this._httpnative
       .post('https://api.razorpay.com/v1/orders', obj, headers)
       .then((datasuccess) => {
+
         try {
           datasuccess.data = JSON.parse(datasuccess.data);
-          if (datasuccess.data.id != null)
+          if (datasuccess.data.id != null){
             this.postPaymentDetails(datasuccess.data.id, outstandingPaymentAmt);
+          }
         } catch (e) {
+          // alert(JSON.parse("JSON parsing error"));
           console.error('JSON parsing error');
         }
       })
       .catch((dataerror) => {
         if (dataerror.error) {
-          alert(JSON.parse(dataerror.error).error.description);
+          console.log("Error catched >>>>>", dataerror.error);
+          // alert(JSON.parse(dataerror.error).error.description);
+          // alert(JSON.parse(dataerror));
+          alert(JSON.stringify(dataerror.error))
         }
       });
   }
@@ -853,6 +861,7 @@ export class GlobalService {
       .post(this.urls + 'Payment/PostPaymentdetail', obj)
       .toPromise()
       .then((response: any) => {
+
         if (response.btIsSuccess) {
           let obj = response.object;
           //set razoppay auth
@@ -876,7 +885,7 @@ export class GlobalService {
         }
       })
       .catch((e) => {
-        console.log('Error', e);
+        console.log('Error >>>> ', e);
       });
   }
 
@@ -891,6 +900,7 @@ export class GlobalService {
   ) {
     var options;
 
+
     options = {
       description: projectDesc,
       order_id: orderId,
@@ -903,24 +913,44 @@ export class GlobalService {
       },
       prefill: prefill,
       notes: vcTransactionNo,
-      modal: {
-        ondismiss: function () {
-          localStorage.setItem('RAZORPAY_dismiss', 'Y');
-        },
-      },
+      // modal: {
+      //   ondismiss: function () {
+      //     localStorage.setItem('RAZORPAY_dismiss', 'Y');
+      //   },
+      // },
     };
 
-    await Checkout.open(options)
-      .then((response: any) => {
-        if (response.response.hasOwnProperty('razorpay_signature')) {
-          this.paymentSuccessfull(response.response);
+    try {
+      let data : any = (await Checkout.open(options));
+      if (data.response.hasOwnProperty('razorpay_signature')) {
+
+          this.paymentSuccessfull(data.response);
         } else {
-          this.paymentFailed(response.response);
+
+          this.paymentFailed(data.response);
         }
-      })
-      .catch((e) => {
-        alert(JSON.parse(e.code).description);
-      });
+    } catch (error) {
+        alert(JSON.parse(error.code).error.description);
+    }
+
+    // await Checkout.open(options)
+    //   .then((response: any) => {
+    //     console.log("Succes open modal>>>>>>>")
+    //     if (response.response.hasOwnProperty('razorpay_signature')) {
+    //     console.log("if open modal>>>>>>>")
+
+    //       this.paymentSuccessfull(response.response);
+    //     } else {
+    //     console.log("else open modal>>>>>>>")
+
+    //       this.paymentFailed(response.response);
+    //     }
+    //   })
+    //   .catch((e) => {
+    //     console.log("Error open modal>>>>>>>", e)
+
+    //     alert(JSON.parse(e.code).description);
+    //   });
   }
 
   paymentSuccessfull(payObj: IRazorPaySuccess) {
