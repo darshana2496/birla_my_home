@@ -1,11 +1,7 @@
-<app-header
-  [type]="'menu'"
-  [typeTitle]="'pageName'"
-  [pageNameVal]="'Payment'"
-></app-header>
+<app-header [type]="'menu'" [typeTitle]="'pageName'" [pageNameVal]="'Payment'"></app-header>
 <ion-content class="lyt-section typ-bg tabs">
   <div class="content-inner">
-    <div class="content no-padding app-tab" *ngIf="!serverError">
+    <div class="content no-padding app-tab payment-tabs" *ngIf="!serverError">
       <ion-segment [(ngModel)]="CustomerSegment" class="app-tab-nav">
         <ion-segment-button value="next" class="app-tab-nav-item">
           Pending
@@ -16,6 +12,9 @@
         <ion-segment-button value="past" class="app-tab-nav-item">
           Past
         </ion-segment-button>
+        <ion-segment-button value="interest" class="app-tab-nav-item">
+          Interest Information
+        </ion-segment-button>
       </ion-segment>
       <div [ngSwitch]="CustomerSegment" class="tab-content app-tab-content">
         <div *ngSwitchCase="'next'">
@@ -24,80 +23,54 @@
               <li class="item">
                 <div class="text">* Total Invoice Raised</div>
                 <div class="date">
-                  <i class="icon-inr"></i
-                  >{{pendingData.vcTotalinvoiceraised|currencyDisplay}}
+                  <i class="icon-inr"></i>{{pendingData.vcTotalinvoiceraised|currencyDisplay}}
                 </div>
                 <div class="amount">
-                  (<i class="icon-inr"></i
-                  >{{pendingData.vcTotalinvoiceraisedconverted}})
+                  (<i class="icon-inr"></i>{{pendingData.vcTotalinvoiceraisedconverted}})
                 </div>
                 <div class="includin-tax-txt">* Including taxes</div>
               </li>
               <li class="item">
                 <div class="text">Total Amount Received</div>
                 <div class="date">
-                  <i class="icon-inr"></i
-                  >{{pendingData.vcTotalreceived|currencyDisplay}}
+                  <i class="icon-inr"></i>{{pendingData.vcTotalreceived|currencyDisplay}}
                 </div>
                 <div class="amount">
-                  (<i class="icon-inr"></i
-                  >{{pendingData.vcTotalreceivedconverted}})
+                  (<i class="icon-inr"></i>{{pendingData.vcTotalreceivedconverted}})
                 </div>
               </li>
               <li class="item">
                 <div class="text">Total Outstanding Amount</div>
                 <div class="date">
-                  <i
-                    class="icon-inr"
-                    *ngIf="pendingData.vcTotaloutstanding !== null || pendingData.vcTotaloutstanding"
-                  ></i
-                  >{{pendingData.vcTotaloutstanding|currencyDisplay}}
+                  <i class="icon-inr"
+                    *ngIf="pendingData.vcTotaloutstanding !== null || pendingData.vcTotaloutstanding"></i>{{pendingData.vcTotaloutstanding|currencyDisplay}}
                 </div>
-                <div
-                  class="date"
-                  *ngIf="pendingData.vcTotaloutstanding === null || !pendingData.vcTotaloutstanding"
-                >
+                <div class="date" *ngIf="pendingData.vcTotaloutstanding === null || !pendingData.vcTotaloutstanding">
                   -
                 </div>
-                <div
-                  class="amount"
-                  *ngIf="pendingData.vcTotaloutstanding !== null || pendingData.vcTotaloutstanding"
-                >
-                  (<i
-                    class="icon-inr"
-                    *ngIf="!pendingData.vcTotaloutstandingconverted.includes('Currently')"
-                  ></i
-                  >{{pendingData.vcTotaloutstandingconverted}})
+                <div class="amount" *ngIf="pendingData.vcTotaloutstanding !== null || pendingData.vcTotaloutstanding">
+                  (<i class="icon-inr"
+                    *ngIf="!pendingData.vcTotaloutstandingconverted.includes('Currently')"></i>{{pendingData.vcTotaloutstandingconverted}})
                 </div>
               </li>
             </ul>
           </div>
           <ul class="bs-button-group ion-text-center">
             <li class="item">
-              <ion-button (click)="dropCheque()" class="app-btn btn-default"
-                >CHEQUE DROP LOCATIONS</ion-button
-              >
+              <ion-button (click)="dropCheque()" class="app-btn btn-default">CHEQUE DROP LOCATIONS</ion-button>
             </li>
             <!-- commented for first build -->
             <!-- <li class="item">
               <common-button [pageData]="payOnline"></common-button>
             </li> -->
-            <li
-              class="item"
-              *ngIf="pendingData.vcTotaloutstanding !== null && pendingData.vcTotaloutstanding !== 'N/A' && pendingData.vcTotaloutstanding"
-            >
-              <ion-button
-                (click)="makePayment()"
-                [disabled]="!disableBtn"
-                class="app-btn btn-default"
-                >PAY ONLINE</ion-button
-              >
+            <li class="item"
+              *ngIf="pendingData.vcTotaloutstanding !== null && pendingData.vcTotaloutstanding !== 'N/A' && pendingData.vcTotaloutstanding">
+              <ion-button (click)="makePayment()" [disabled]="!disableBtn" class="app-btn btn-default">PAY
+                ONLINE</ion-button>
               <!-- [disabled]="!disableBtn" -->
             </li>
             <li class="item">
-              <ion-button class="app-btn btn-link" (click)="chequeDetailpage()"
-                >CHEQUE ALREADY DROPPED ?</ion-button
-              >
+              <ion-button class="app-btn btn-link" (click)="chequeDetailpage()">CHEQUE ALREADY DROPPED ?</ion-button>
 
               <!-- <common-text-button [pageData]="addDropLocation"></common-text-button> -->
             </li>
@@ -122,20 +95,16 @@
                   <li class="item">
                     <div class="text">* Total Amount Payable</div>
                     <div class="date">
-                      <i class="icon-inr"></i
-                      >{{futureData.vcTotalamountpayable|currencyDisplay}}
+                      <i class="icon-inr"></i>{{futureData.vcTotalamountpayable|currencyDisplay}}
                     </div>
                     <div class="amount">
-                      (<i class="icon-inr"></i
-                      >{{futureData.vcTotalamountpayableconverted}})
+                      (<i class="icon-inr"></i>{{futureData.vcTotalamountpayableconverted}})
                     </div>
                   </li>
                 </ul>
               </div>
-              <div
-                class="bs-amount-info"
-                *ngFor="let payment of futureData.customerPortal_SubFuturePaymentModelList;let i=index"
-              >
+              <div class="bs-amount-info"
+                *ngFor="let payment of futureData.customerPortal_SubFuturePaymentModelList;let i=index">
                 <div class="number">{{i+1}}</div>
                 <ion-grid class="top-section grid">
                   <ion-row class="row">
@@ -144,9 +113,7 @@
                         <li class="item has-star">
                           <div class="title">Percentage</div>
                           <div>
-                            <span class="date"
-                              >{{payment.vcPaymentpercent}} %</span
-                            >
+                            <span class="date">{{payment.vcPaymentpercent}} %</span>
                           </div>
                         </li>
                       </ul>
@@ -156,13 +123,10 @@
                         <li class="item has-star">
                           <div class="title">Amount payable</div>
                           <div class="display-flexing">
-                            <span class="date"
-                              ><i class="icon-inr" style="font-size: 11px"></i
-                              >{{payment.vcAmountpayable|currencyDisplay}}</span
-                            >
+                            <span class="date"><i class="icon-inr"
+                                style="font-size: 11px"></i>{{payment.vcAmountpayable|currencyDisplay}}</span>
                             <div class="amount">
-                              (<i class="icon-inr"></i
-                              >{{payment.vcaAmountpayableconverted}})
+                              (<i class="icon-inr"></i>{{payment.vcaAmountpayableconverted}})
                             </div>
                           </div>
                         </li>
@@ -182,12 +146,10 @@
             </div>
             <div class="paymet-note">
               <div>
-                <span class="star">*</span
-                ><span class="note"> Payment dates are subject to change.</span>
+                <span class="star">*</span><span class="note"> Payment dates are subject to change.</span>
               </div>
               <div>
-                <span class="star">*</span
-                ><span class="note"> All Amounts are Excluding Taxes.</span>
+                <span class="star">*</span><span class="note"> All Amounts are Excluding Taxes.</span>
               </div>
             </div>
           </div>
@@ -195,10 +157,7 @@
 
         <div *ngSwitchCase="'past'">
           <div class="lyt-payment-future">
-            <ion-list
-              class="bs-amount-info-sliding"
-              *ngFor="let payment of pastData;let i=index"
-            >
+            <ion-list class="bs-amount-info-sliding" *ngFor="let payment of pastData;let i=index">
               <ion-item-sliding>
                 <ion-item lines="none" class="payment-item">
                   <div class="number">{{i+1}}</div>
@@ -243,6 +202,42 @@
             </ion-list>
 
             <div *ngIf="!pastData.length ion-text-center">No records found</div>
+          </div>
+        </div>
+        <div *ngSwitchCase="'interest'">
+          <div class="bs-payment-info">
+            <ul class="list">
+              <li class="item">
+                <div class="text">* Interest Due</div>
+                <div class="date">
+                  <i class="icon-inr"></i>2,38,974
+                </div>
+                <div class="amount">
+                  (<i class="icon-inr"></i>1.5 Lacs)
+                </div>
+                <div class="includin-tax-txt">* Including taxes</div>
+              </li>
+              <li class="item">
+                <div class="text">* Interest Payment Received</div>
+                <div class="date">
+                  <i class="icon-inr"></i>2,38,974
+                </div>
+                <div class="amount">
+                  (<i class="icon-inr"></i>1.5 Lacs)
+                </div>
+                <div class="includin-tax-txt">* Including taxes</div>
+              </li>
+              <li class="item">
+                <div class="text">* Interest Outstanding</div>
+                <div class="date">
+                  <i class="icon-inr"></i>2,38,974
+                </div>
+                <div class="amount">
+                  (<i class="icon-inr"></i>1.5 Lacs)
+                </div>
+                <div class="includin-tax-txt">* Including taxes</div>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
