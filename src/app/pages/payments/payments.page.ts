@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { GlobalService } from 'src/app/services/global.service';
 import {
   IPaymentFutureData,
+  IPaymentInterestData,
   IPaymentPendingData,
 } from 'src/app/utilities/constants/commonInterface';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
@@ -24,6 +25,15 @@ export class PaymentsPage implements OnInit {
     vcTotaloutstandingconverted: '0',
     vcTotalreceived: '0',
     vcTotalreceivedconverted: '0',
+  };
+  
+  interestData: IPaymentInterestData = {
+    vcIntrestAmount: '0',
+    vcIntrestAmountBalence: '0',
+    vcIntrestAmountBalenceconverted: '0',
+    vcIntrestAmountPaid: '0',
+    vcIntrestAmountPaidconverted: '0',
+    vcIntrestAmountconverted: '0'
   };
   futureData: IPaymentFutureData = {
     intTotalpendinginstallment: '0',
@@ -55,6 +65,15 @@ export class PaymentsPage implements OnInit {
     vcTotaloutstandingconverted: '0',
     vcTotalreceived: '0',
     vcTotalreceivedconverted: '0',
+  };
+ 
+  noInterestData: any = {
+    vcIntrestAmount: '0',
+    vcIntrestAmountBalence: '0',
+    vcIntrestAmountBalenceconverted: '0',
+    vcIntrestAmountPaid: '0',
+    vcIntrestAmountPaidconverted: '0',
+    vcIntrestAmountconverted: '0'
   };
   noFutureData: any = {
     intTotalpendinginstallment: '0',
@@ -279,6 +298,12 @@ export class PaymentsPage implements OnInit {
               }
             });
             this.pastData = data.customerPortal_PastPaymentModelList;
+          }
+
+          if (data.customerPortal_IntrestPaymentModel == null) {
+            this.interestData = this.noInterestData;
+          } else {
+            this.interestData = data.customerPortal_IntrestPaymentModel;
           }
         } else {
           this.serverError = true;

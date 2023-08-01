@@ -49,6 +49,15 @@ export interface IPaymentPendingData {
     vcTotalreceivedconverted: string,
 }
 
+export interface IPaymentInterestData {
+    vcIntrestAmount: string,
+    vcIntrestAmountBalence: string,
+    vcIntrestAmountBalenceconverted: string,
+    vcIntrestAmountPaid: string,
+    vcIntrestAmountPaidconverted: string,
+    vcIntrestAmountconverted: string
+}
+
 export interface IPaymentFutureData {
     intTotalpendinginstallment: string,
     vcTotalamountpayable: string,

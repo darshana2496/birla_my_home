@@ -208,34 +208,34 @@
           <div class="bs-payment-info">
             <ul class="list">
               <li class="item">
-                <div class="text">* Interest Due</div>
+                <div class="text">Interest Accrued *</div>
                 <div class="date">
-                  <i class="icon-inr"></i>2,38,974
+                  <i class="icon-inr"></i>{{interestData.vcIntrestAmount|currencyDisplay}}
                 </div>
                 <div class="amount">
-                  (<i class="icon-inr"></i>1.5 Lacs)
+                  (<i class="icon-inr"></i>{{interestData.vcIntrestAmountconverted}})
                 </div>
-                <div class="includin-tax-txt">* Including taxes</div>
+                <div class="includin-tax-txt">* All amounts excluding GST</div>
               </li>
               <li class="item">
-                <div class="text">* Interest Payment Received</div>
+                <div class="text">Interest Payment Received *</div>
                 <div class="date">
-                  <i class="icon-inr"></i>2,38,974
+                  <i class="icon-inr"></i>{{interestData.vcIntrestAmountPaid|currencyDisplay}}
                 </div>
                 <div class="amount">
-                  (<i class="icon-inr"></i>1.5 Lacs)
+                  (<i class="icon-inr"></i>{{interestData.vcIntrestAmountPaidconverted}})
                 </div>
-                <div class="includin-tax-txt">* Including taxes</div>
+                <div class="includin-tax-txt">* All amounts excluding GST</div>
               </li>
               <li class="item">
-                <div class="text">* Interest Outstanding</div>
+                <div class="text">Interest Outstanding *</div>
                 <div class="date">
-                  <i class="icon-inr"></i>2,38,974
+                  <i class="icon-inr"></i>{{interestData.vcIntrestAmountBalence|currencyDisplay}}
                 </div>
                 <div class="amount">
-                  (<i class="icon-inr"></i>1.5 Lacs)
+                  (<i class="icon-inr"></i>{{interestData.vcIntrestAmountBalenceconverted}})
                 </div>
-                <div class="includin-tax-txt">* Including taxes</div>
+                <div class="includin-tax-txt">* All amounts excluding GST</div>
               </li>
             </ul>
           </div>

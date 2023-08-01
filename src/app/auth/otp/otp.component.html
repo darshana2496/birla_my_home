@@ -1,8 +1,4 @@
-<app-header
-  class="typ-transparent"
-  [type]="'normal'"
-  [typeTitle]="'logo'"
-></app-header>
+<app-header class="typ-transparent" [type]="'normal'" [typeTitle]="'logo'"></app-header>
 
 <ion-content [fullscreen]="true" class="lyt-section typ-bg extra-padding">
   <div class="otp-page-content" *ngIf="userDetails">
@@ -11,31 +7,21 @@
         <h2 class="title">Hello</h2>
         <h3 class="sub-title">{{ userDetails.vcName }}</h3>
         <div class="button-parent">
-          <ion-button class="app-btn btn-link ion-no-padding"
-            >NOT YOU ?</ion-button
-          >
+          <ion-button class="app-btn btn-link ion-no-padding" [routerLink]="['/loginwithcustid']">NOT YOU ?</ion-button>
         </div>
       </div>
       <div class="bs-form">
         <form [formGroup]="otpFormGroup">
-          <span class="field-label"
-            >OTP sent on
+          <span class="field-label">OTP sent on
             <span class="cm-bold">{{
               userDetails.vcContactNo | encryptNumberPipe
-            }}</span>
+              }}</span>
             and also on
             <span class="cm-bold">{{ userDetails.vcEmail }}</span>
           </span>
           <ion-item lines="none" class="app-form-group">
-            <ion-label class="app-field-label" position="floating"
-              >Enter OTP</ion-label
-            >
-            <ion-input
-              class="app-form-control"
-              type="number"
-              formControlName="otp"
-              maxlength="6"
-            ></ion-input>
+            <ion-label class="app-field-label" position="floating">Enter OTP</ion-label>
+            <ion-input class="app-form-control" type="number" formControlName="otp" maxlength="6"></ion-input>
             <ion-button (click)="showResendOtpOption()">
               <span class="icons icon-next"></span>
             </ion-button>

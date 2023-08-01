@@ -10,7 +10,6 @@ import { CommonComponentsModule } from './../common-components/common-components
 import { AuthRoutingModule } from './auth-routing.module';
 
 import { AuthComponent } from './auth.component';
-import { LoginComponent } from './login/login.component';
 import { AppIntroPage } from './app-intro/app-intro.component';
 import { KnowYourCustIdPage } from './know-your-cust-id/know-your-cust-id.component';
 import { LandingPage } from './landing/landing.component';
@@ -32,7 +31,6 @@ import { Device } from '@awesome-cordova-plugins/device/ngx';
   ],
   declarations: [
     AuthComponent,
-    LoginComponent,
     AppIntroPage,
     KnowYourCustIdPage,
     LandingPage,

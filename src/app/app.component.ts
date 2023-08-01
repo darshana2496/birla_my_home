@@ -66,7 +66,7 @@ export class AppComponent {
           }
         }
 
-        if (this.globalService.customerId) {
+        if (this.globalService.customerId ) {
           this.timerSubscription = timer(0, 10000)
             .pipe(
               map(() => {
