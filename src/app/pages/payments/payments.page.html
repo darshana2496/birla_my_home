@@ -2,7 +2,7 @@
 <ion-content class="lyt-section typ-bg tabs">
   <div class="content-inner">
     <div class="content no-padding app-tab payment-tabs" *ngIf="!serverError">
-      <ion-segment [scrollable]="true" [(ngModel)]="CustomerSegment" class="app-tab-nav">
+      <ion-segment [scrollable]="true" mode="md" [(ngModel)]="CustomerSegment" class="app-tab-nav">
         <ion-segment-button value="next" class="app-tab-nav-item">
           Pending
         </ion-segment-button>
