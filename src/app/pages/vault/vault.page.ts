@@ -25,6 +25,7 @@ export class VaultPage implements OnInit {
   myUploadSearch: string;
   searchText: string = '';
   searchHandoverText: string = '';
+  searchMiscellaneousText: string = '';
   activeItemSliding: IonItemSliding = null;
   isSlideOpen: Boolean = false;
   adminUploadedDocs: ITdsDocuments[] = [];
@@ -35,6 +36,7 @@ export class VaultPage implements OnInit {
     { name: 'Other Property Letters', count: 0, documentList: '' },
   ];
   adminHandoverDocs: any;
+  adminMiscellaneousDocs: any;
   constructor(
     public globalService: GlobalService,
     public route: Router,
@@ -74,12 +76,14 @@ export class VaultPage implements OnInit {
       .then((response: any) => {
         if (
           response.btIsSuccess &&
-          response.object &&
-          response.object.subPkgDocumentList &&
-          response.object.subPkgHandoverDocumentList
+          response.object 
+          // response.object.subPkgDocumentList &&
+          // response.object.subPkgHandoverDocumentList &&
+          // response.object.subPkgHandoverDocumentList
         ) {
-          this.adminUploadedDocs = response.object.subPkgDocumentList;
-          this.adminHandoverDocs = response.object.subPkgHandoverDocumentList;
+          this.adminUploadedDocs = response.object.subPkgDocumentList ? response.object.subPkgDocumentList : [];
+          this.adminHandoverDocs = response.object.subPkgHandoverDocumentList ? response.object.subPkgHandoverDocumentList: [];
+          this.adminMiscellaneousDocs = response.object.subPkgMiscDocumentList ? response.object.subPkgMiscDocumentList: [];
 
           //if (this.globalService.tdsFilterObject.documentType == "") {
           for (let i = 0; i < response.object.subPkgDocumentList.length; i++) {
@@ -174,9 +178,38 @@ export class VaultPage implements OnInit {
             //   this.staticVaultList.push(newStaticVal);
             // }
           }
+         
+          // Miscellaneous docs decryption
+          for (
+            let i = 0;
+            i < response.object.subPkgMiscDocumentList.length;
+            i++
+          ) {
+            let decryptVcType = this.globalService.decrypt(
+              this.globalService.encryptSecretKey,
+              response.object.subPkgMiscDocumentList[i].vcType
+            );
+            let decryptvcFilename = this.globalService.decrypt(
+              this.globalService.encryptSecretKey,
+              response.object.subPkgMiscDocumentList[i].vcFilename
+            );
+            let decryptvcFileURL = this.globalService.decrypt(
+              this.globalService.encryptSecretKey,
+              response.object.subPkgMiscDocumentList[i].vcFileUrl
+            );
+
+            response.object.subPkgMiscDocumentList[i].vcType =
+              decryptVcType;
+            response.object.subPkgMiscDocumentList[i].vcFilename =
+              decryptvcFilename;
+            response.object.subPkgMiscDocumentList[i].vcFileUrl =
+              decryptvcFileURL;
+
+          }
         } else {
           this.adminUploadedDocs = [];
           this.adminHandoverDocs = [];
+          this.adminMiscellaneousDocs = [];
         }
       })
       .catch((response: any) => {});

@@ -1,8 +1,4 @@
-<app-header
-  [type]="'menu'"
-  [typeTitle]="'pageName'"
-  [pageNameVal]="'Vault'"
-></app-header>
+<app-header [type]="'menu'" [typeTitle]="'pageName'" [pageNameVal]="'Vault'"></app-header>
 
 <ion-content class="lyt-section tabs typ-bg-uploads">
   <ion-fab vertical="top" horizontal="end" [edge]="true">
@@ -12,14 +8,17 @@
       </ion-button>
     </ion-fab-list>
   </ion-fab>
-  <div class="content-inner">
-    <div class="content no-padding app-tab">
-      <ion-segment [(ngModel)]="CustomerSegment" class="app-tab-nav">
+  <div class="content-inner lyt-upload">
+    <div class="content no-padding app-tab payment-tabs">
+      <ion-segment [scrollable]="true" mode="md" [(ngModel)]="CustomerSegment" class="app-tab-nav">
         <ion-segment-button value="documents" class="app-tab-nav-item">
           Documents
         </ion-segment-button>
         <ion-segment-button value="handoverDocs" class="app-tab-nav-item">
           Handover Documents
+        </ion-segment-button>
+        <ion-segment-button value="miscellaneousDocs" class="app-tab-nav-item">
+          Miscellaneous Documents
         </ion-segment-button>
       </ion-segment>
 
@@ -28,15 +27,9 @@
           <div class="head">
             <div class="search-bar">
               <ion-item lines="none" class="app-form-group">
-                <ion-label class="app-field-label"
-                  ><span class="icon icon-search"></span
-                ></ion-label>
-                <ion-input
-                  class="app-form-control"
-                  type="text"
-                  placeholder="Search"
-                  [(ngModel)]="searchText"
-                ></ion-input>
+                <ion-label class="app-field-label"><span class="icon icon-search"></span></ion-label>
+                <ion-input class="app-form-control" type="text" placeholder="Search"
+                  [(ngModel)]="searchText"></ion-input>
               </ion-item>
             </div>
           </div>
@@ -44,21 +37,12 @@
           <div class="cont">
             <div class="document-list">
               <ion-list class="card-list">
-                <div
-                  class="bs-doc"
-                  *ngFor="let adminDocs of adminUploadedDocs | searchFilterPipe :searchText;let i=index"
-                >
+                <div class="bs-doc"
+                  *ngFor="let adminDocs of adminUploadedDocs | searchFilterPipe :searchText;let i=index">
                   <ion-item-sliding #slidingItem>
-                    <ion-item
-                      lines="none"
-                      class="iconwithtext"
-                      (click)="viewDocs(adminDocs)"
-                    >
+                    <ion-item lines="none" class="iconwithtext" (click)="viewDocs(adminDocs)">
                       <div class="icon">
-                        <img
-                          src="../../../assets/images/customer-portal_TDS.svg"
-                          alt="customer-portal_TDS"
-                        />
+                        <img src="../../../assets/images/customer-portal_TDS.svg" alt="customer-portal_TDS" />
                       </div>
                       <div class="text">
                         <h2 class="title">{{adminDocs.vcFilename}}</h2>
@@ -68,19 +52,14 @@
                       </div>
                     </ion-item>
                     <ion-item-options side="end" class="act-wrap">
-                      <ion-button
-                        class="app-btn btn-icon"
-                        (click)="shareDoc(adminDocs)"
-                      >
+                      <ion-button class="app-btn btn-icon" (click)="shareDoc(adminDocs)">
                         <ion-icon name="share-social-outline"></ion-icon>
                       </ion-button>
                     </ion-item-options>
                   </ion-item-sliding>
                 </div>
-                <div
-                  class="ion-text-left"
-                  *ngIf="(adminUploadedDocs | searchFilterPipe :searchText).length === 0 || !adminUploadedDocs.length"
-                >
+                <div class="ion-text-left"
+                  *ngIf="(adminUploadedDocs | searchFilterPipe :searchText).length === 0 || !adminUploadedDocs.length">
                   No documents found.
                 </div>
               </ion-list>
@@ -91,15 +70,9 @@
           <div class="head">
             <div class="search-bar">
               <ion-item lines="none" class="app-form-group">
-                <ion-label class="app-field-label"
-                  ><span class="icon icon-search"></span
-                ></ion-label>
-                <ion-input
-                  class="app-form-control"
-                  type="text"
-                  placeholder="Search"
-                  [(ngModel)]="searchHandoverText"
-                ></ion-input>
+                <ion-label class="app-field-label"><span class="icon icon-search"></span></ion-label>
+                <ion-input class="app-form-control" type="text" placeholder="Search"
+                  [(ngModel)]="searchHandoverText"></ion-input>
               </ion-item>
             </div>
           </div>
@@ -107,20 +80,11 @@
           <div class="cont">
             <div class="document-list">
               <ion-list class="card-list">
-                <div
-                  class="bs-doc"
-                  *ngFor="let handoverDocs of adminHandoverDocs | searchFilterPipe :searchHandoverText;let i=index"
-                >
-                  <ion-item
-                    lines="none"
-                    class="iconwithtext"
-                    (click)="viewHandoverDocs(handoverDocs)"
-                  >
+                <div class="bs-doc"
+                  *ngFor="let handoverDocs of adminHandoverDocs | searchFilterPipe :searchHandoverText;let i=index">
+                  <ion-item lines="none" class="iconwithtext" (click)="viewHandoverDocs(handoverDocs)">
                     <div class="icon">
-                      <img
-                        src="../../../assets/images/customer-portal_TDS.svg"
-                        alt="customer-portal_TDS"
-                      />
+                      <img src="../../../assets/images/customer-portal_TDS.svg" alt="customer-portal_TDS" />
                     </div>
                     <div class="text">
                       <h2 class="title">{{handoverDocs.vcFilename}}</h2>
@@ -130,10 +94,44 @@
                     </div>
                   </ion-item>
                 </div>
-                <div
-                  class="ion-text-left"
-                  *ngIf="(adminHandoverDocs | searchFilterPipe :searchHandoverText).length === 0 || !adminHandoverDocs.length"
-                >
+                <div class="ion-text-left"
+                  *ngIf="(adminHandoverDocs | searchFilterPipe :searchHandoverText).length === 0 || !adminHandoverDocs.length">
+                  No documents found.
+                </div>
+              </ion-list>
+            </div>
+          </div>
+        </div>
+        <div *ngSwitchCase="'miscellaneousDocs'">
+          <div class="head">
+            <div class="search-bar">
+              <ion-item lines="none" class="app-form-group">
+                <ion-label class="app-field-label"><span class="icon icon-search"></span></ion-label>
+                <ion-input class="app-form-control" type="text" placeholder="Search"
+                  [(ngModel)]="searchMiscellaneousText"></ion-input>
+              </ion-item>
+            </div>
+          </div>
+
+          <div class="cont">
+            <div class="document-list">
+              <ion-list class="card-list">
+                <div class="bs-doc"
+                  *ngFor="let miscellaneousDocs of adminMiscellaneousDocs | searchFilterPipe :searchMiscellaneousText;let i=index">
+                  <ion-item lines="none" class="iconwithtext" (click)="viewHandoverDocs(miscellaneousDocs)">
+                    <div class="icon">
+                      <img src="../../../assets/images/customer-portal_TDS.svg" alt="customer-portal_TDS" />
+                    </div>
+                    <div class="text">
+                      <h2 class="title">{{miscellaneousDocs.vcFilename}}</h2>
+                      <h3 class="time-stamp">
+                        uploaded on {{miscellaneousDocs.vcUploadedOn}}
+                      </h3>
+                    </div>
+                  </ion-item>
+                </div>
+                <div class="ion-text-left"
+                  *ngIf="(adminMiscellaneousDocs | searchFilterPipe :searchMiscellaneousText).length === 0 || !adminMiscellaneousDocs.length">
                   No documents found.
                 </div>
               </ion-list>
