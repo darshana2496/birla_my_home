@@ -12,9 +12,9 @@
         <ion-segment-button value="past" class="app-tab-nav-item">
           Past
         </ion-segment-button>
-        <ion-segment-button value="interest" class="app-tab-nav-item">
+        <!-- <ion-segment-button value="interest" class="app-tab-nav-item">
           Interest Information
-        </ion-segment-button>
+        </ion-segment-button> -->
       </ion-segment>
       <div [ngSwitch]="CustomerSegment" class="tab-content app-tab-content">
         <div *ngSwitchCase="'next'">
@@ -204,7 +204,7 @@
             <div *ngIf="!pastData.length ion-text-center">No records found</div>
           </div>
         </div>
-        <div *ngSwitchCase="'interest'">
+        <!-- <div *ngSwitchCase="'interest'">
           <div class="bs-payment-info">
             <ul class="list">
               <li class="item">
@@ -239,7 +239,7 @@
               </li>
             </ul>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
 
