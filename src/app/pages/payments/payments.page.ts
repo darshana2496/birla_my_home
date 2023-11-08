@@ -145,40 +145,46 @@ export class PaymentsPage implements OnInit {
                 .vcTotaloutstandingconverted
             );
 
+          console.log("Pending data", data.objCustomerPortal_PendingPaymentModel);
+          
+
             // Interest 
-          data.customerPortal_IntrestPaymentModel.vcIntrestAmount =
-            this.globalService.decrypt(
-              this.globalService.encryptSecretKey,
-              data.customerPortal_IntrestPaymentModel.vcIntrestAmount
-            );
-          data.customerPortal_IntrestPaymentModel.vcIntrestAmountconverted =
-            this.globalService.decrypt(
-              this.globalService.encryptSecretKey,
-              data.customerPortal_IntrestPaymentModel
-                .vcIntrestAmountconverted
-            );
-          data.customerPortal_IntrestPaymentModel.vcIntrestAmountPaid =
-            this.globalService.decrypt(
-              this.globalService.encryptSecretKey,
-              data.customerPortal_IntrestPaymentModel.vcIntrestAmountPaid
-            );
-          data.customerPortal_IntrestPaymentModel.vcIntrestAmountPaidconverted =
-            this.globalService.decrypt(
-              this.globalService.encryptSecretKey,
-              data.customerPortal_IntrestPaymentModel
-                .vcIntrestAmountPaidconverted
-            );
-          data.customerPortal_IntrestPaymentModel.vcIntrestAmountBalence =
-            this.globalService.decrypt(
-              this.globalService.encryptSecretKey,
-              data.customerPortal_IntrestPaymentModel.vcIntrestAmountBalence
-            );
-          data.customerPortal_IntrestPaymentModel.vcIntrestAmountBalenceconverted =
-            this.globalService.decrypt(
-              this.globalService.encryptSecretKey,
-              data.customerPortal_IntrestPaymentModel
-                .vcIntrestAmountBalenceconverted
-            );
+            if(data.customerPortal_IntrestPaymentModel){
+
+              data.customerPortal_IntrestPaymentModel.vcIntrestAmount =
+                this.globalService.decrypt(
+                  this.globalService.encryptSecretKey,
+                  data.customerPortal_IntrestPaymentModel.vcIntrestAmount
+                );
+              data.customerPortal_IntrestPaymentModel.vcIntrestAmountconverted =
+                this.globalService.decrypt(
+                  this.globalService.encryptSecretKey,
+                  data.customerPortal_IntrestPaymentModel
+                    .vcIntrestAmountconverted
+                );
+              data.customerPortal_IntrestPaymentModel.vcIntrestAmountPaid =
+                this.globalService.decrypt(
+                  this.globalService.encryptSecretKey,
+                  data.customerPortal_IntrestPaymentModel.vcIntrestAmountPaid
+                );
+              data.customerPortal_IntrestPaymentModel.vcIntrestAmountPaidconverted =
+                this.globalService.decrypt(
+                  this.globalService.encryptSecretKey,
+                  data.customerPortal_IntrestPaymentModel
+                    .vcIntrestAmountPaidconverted
+                );
+              data.customerPortal_IntrestPaymentModel.vcIntrestAmountBalence =
+                this.globalService.decrypt(
+                  this.globalService.encryptSecretKey,
+                  data.customerPortal_IntrestPaymentModel.vcIntrestAmountBalence
+                );
+              data.customerPortal_IntrestPaymentModel.vcIntrestAmountBalenceconverted =
+                this.globalService.decrypt(
+                  this.globalService.encryptSecretKey,
+                  data.customerPortal_IntrestPaymentModel
+                    .vcIntrestAmountBalenceconverted
+                );
+            }
 
           data.customerPortal_FuturePaymentModel.vcTotalamountpayable =
             this.globalService.decrypt(

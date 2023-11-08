@@ -1,13 +1,6 @@
 apply plugin: 'com.android.application'
 
 android {
-     signingConfigs {
-    birla_keystore {
-      storePassword 'Birla'
-      keyAlias 'Birla'
-      keyPassword 'Birla'
-    }
-  }
     compileSdkVersion 31
     defaultConfig {
         applicationId "io.birla.myhome"
