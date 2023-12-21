@@ -381,4 +381,5 @@ export class PaymentsPage implements OnInit {
   async openUrl(url: any) {
     await Browser.open({ url });
   }
+
 }
