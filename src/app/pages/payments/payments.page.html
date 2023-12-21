@@ -79,6 +79,10 @@
             <p class="optIn">{{vcOptIn}}</p>
             <!-- <p class="optOut" >{{vcOptOut}}</p> -->
           </div>
+          <div class="video-url">
+            <p><strong>Video Link : </strong><a
+                (click)="openUrl(pendingData.paymentVideoLink)">{{pendingData.paymentVideoLink}}</a></p>
+          </div>
         </div>
 
         <div *ngSwitchCase="'future'">

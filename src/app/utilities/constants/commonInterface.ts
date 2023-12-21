@@ -47,6 +47,7 @@ export interface IPaymentPendingData {
     vcTotaloutstandingconverted: string,
     vcTotalreceived: string,
     vcTotalreceivedconverted: string,
+    paymentVideoLink: string;
 }
 
 export interface IPaymentInterestData {

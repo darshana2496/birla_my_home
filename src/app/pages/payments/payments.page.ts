@@ -7,6 +7,7 @@ import {
   IPaymentPendingData,
 } from 'src/app/utilities/constants/commonInterface';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { Browser } from '@capacitor/browser';
 
 @Component({
   selector: 'app-payments',
@@ -25,6 +26,7 @@ export class PaymentsPage implements OnInit {
     vcTotaloutstandingconverted: '0',
     vcTotalreceived: '0',
     vcTotalreceivedconverted: '0',
+    paymentVideoLink: ""
   };
   
   interestData: IPaymentInterestData = {
@@ -65,6 +67,7 @@ export class PaymentsPage implements OnInit {
     vcTotaloutstandingconverted: '0',
     vcTotalreceived: '0',
     vcTotalreceivedconverted: '0',
+    paymentVideoLink: ""
   };
  
   noInterestData: any = {
@@ -373,5 +376,9 @@ export class PaymentsPage implements OnInit {
   }
   chequeDetailpage() {
     this.route.navigate(['/cheque-detail-drop']);
+  }
+
+  async openUrl(url: any) {
+    await Browser.open({ url });
   }
 }
