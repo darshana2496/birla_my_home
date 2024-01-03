@@ -79,10 +79,11 @@
             <p class="optIn">{{vcOptIn}}</p>
             <!-- <p class="optOut" >{{vcOptOut}}</p> -->
           </div>
-          <div class="video-url">
-            <p><strong>Video Link : </strong><a
-                (click)="openUrl(pendingData.paymentVideoLink)">{{pendingData.paymentVideoLink}}</a></p>
-          </div>
+
+          <li class="item ion-text-center">
+            <ion-button class="app-btn btn-default" (click)="openUrl(pendingData.paymentVideoLink)">TDS Video
+              Link</ion-button>
+          </li>
         </div>
 
         <div *ngSwitchCase="'future'">

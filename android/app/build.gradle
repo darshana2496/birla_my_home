@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('D:\\birla_my_home\\android\\birlahome.jks')
+            storePassword 'Birlahome'
+            keyAlias 'Birlahome'
+            keyPassword 'Birlahome'
+        }
+    }
     compileSdkVersion 31
     defaultConfig {
         applicationId "io.birla.myhome"
@@ -14,6 +22,7 @@ android {
              // Default: https://android.googlesource.com/platform/frameworks/base/+/282e181b58cf72b6ca770dc7ca5f91f135444502/tools/aapt/AaptAssets.cpp#61
             ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
+        signingConfig signingConfigs.debug
     }
     buildTypes {
         release {

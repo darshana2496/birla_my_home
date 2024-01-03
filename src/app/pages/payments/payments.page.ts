@@ -147,6 +147,13 @@ export class PaymentsPage implements OnInit {
               data.objCustomerPortal_PendingPaymentModel
                 .vcTotaloutstandingconverted
             );
+          
+          data.objCustomerPortal_PendingPaymentModel.paymentVideoLink =
+            this.globalService.decrypt(
+              this.globalService.encryptSecretKey,
+              data.objCustomerPortal_PendingPaymentModel
+                .paymentVideoLink
+            );
 
           console.log("Pending data", data.objCustomerPortal_PendingPaymentModel);
           
@@ -378,8 +385,12 @@ export class PaymentsPage implements OnInit {
     this.route.navigate(['/cheque-detail-drop']);
   }
 
-  async openUrl(url: any) {
-    await Browser.open({ url });
+  async openUrl(link: any) {
+    if (Browser) {
+    await Browser.open({url : link});
+    } else {
+      alert("Not ready")
+    }
   }
 
 }
