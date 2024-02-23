@@ -1,0 +1,36 @@
+.card {
+    width: 100%;
+    padding: 10px 20px;
+    margin-bottom: 15px;
+}
+
+.card-subtitle {
+    font-size: 12px;
+    margin: 0;
+    line-height: 16px;
+    color: #aaa;
+}
+
+.card-title {
+    color: #000;
+    font-weight: 600;
+    font-size: 16px;
+    text-transform: uppercase;
+    line-height: 18px;
+    margin: 0;
+}
+
+.card-content {
+    margin-top: 10px;
+    border-top: 1px dashed #ccc;
+    width: 100%;
+    padding-top: 10px;
+}
+
+.card-item {
+    margin: 0;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+    color: #aaa;
+}

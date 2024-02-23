@@ -151,6 +151,7 @@ export class AppComponent {
           case '/dashboard':
           case '/vault':
           case '/payments':
+          case '/apf':
           case '/notifications':
             break;
 

@@ -37,7 +37,42 @@
           <div class="cont">
             <div class="document-list">
               <ion-list class="card-list">
-                <div class="bs-doc"
+                <div class="bs-doc">
+                  <ion-accordion-group>
+                    <ion-accordion *ngFor="let group of getKeys()" value={{group}}>
+                      <ion-item slot="header" color="transparent" class="accordion-item">
+                        <ion-label>{{group}}</ion-label>
+                      </ion-item>
+                      <div class="bs-doc"
+                        *ngFor="let subGroup of adminUploadedDocs[group] | searchFilterPipe :searchText;let i=index"
+                        slot="content">
+                        <ion-item-sliding #slidingItem>
+                          <ion-item lines="none" class="iconwithtext" (click)="viewDocs(subGroup)">
+                            <div class="icon">
+                              <img src="../../../assets/images/customer-portal_TDS.svg" alt="customer-portal_TDS" />
+                            </div>
+                            <div class="text">
+                              <h2 class="title">{{subGroup.vcFilename}}</h2>
+                              <h3 class="time-stamp">
+                                uploaded on {{subGroup.vcUploadedOn}}
+                              </h3>
+                            </div>
+                          </ion-item>
+                          <ion-item-options side="end" class="act-wrap">
+                            <ion-button class="app-btn btn-icon" (click)="shareDoc(subGroup)">
+                              <ion-icon name="share-social-outline"></ion-icon>
+                            </ion-button>
+                          </ion-item-options>
+                        </ion-item-sliding>
+                      </div>
+                      <div class="ion-text-left"
+                        *ngIf="(adminUploadedDocs[group] | searchFilterPipe :searchText).length === 0 || !adminUploadedDocs[group].length">
+                        No documents found.
+                      </div>
+                    </ion-accordion>
+                  </ion-accordion-group>
+                </div>
+                <!-- <div class="bs-doc"
                   *ngFor="let adminDocs of adminUploadedDocs | searchFilterPipe :searchText;let i=index">
                   <ion-item-sliding #slidingItem>
                     <ion-item lines="none" class="iconwithtext" (click)="viewDocs(adminDocs)">
@@ -61,7 +96,10 @@
                 <div class="ion-text-left"
                   *ngIf="(adminUploadedDocs | searchFilterPipe :searchText).length === 0 || !adminUploadedDocs.length">
                   No documents found.
-                </div>
+                </div> -->
+
+
+
               </ion-list>
             </div>
           </div>

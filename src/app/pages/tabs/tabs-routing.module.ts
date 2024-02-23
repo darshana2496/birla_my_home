@@ -34,6 +34,13 @@ const routes: Routes = [
             (m) => m.PaymentsPageModule
           ),
       },
+      {
+        path: 'apf',
+        loadChildren: () =>
+          import('../apf/apf.module').then(
+            (m) => m.APFModule
+          ),
+      },
     ],
   },
   {

@@ -1,0 +1,24 @@
+<app-header [type]="'menu'" [typeTitle]="'pageName'" [pageNameVal]="'Approved Project Financial'"></app-header>
+<ion-content class="lyt-section typ-bg ion-padding">
+  <div class="content-inner">
+    <div class="content tab-content app-tab-content">
+      <ng-container *ngIf="apfData.length > 0; else noDataFound">
+        <div class="bs-payment-info card" *ngFor="let item of apfData">
+          <div class="card-header">
+            <p class="card-subtitle">APF Number</p>
+            <p class="card-title">{{item.vcApfNumber}}</p>
+          </div>
+          <div class="card-content">
+            <p class="card-item">{{item.vcProjectName}} | {{item.vcTower}}</p>
+            <p class="card-item">Bank - {{item.vcBankName}}</p>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #noDataFound>
+        <div class="ion-text-center">
+          <p>No data found</p>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</ion-content>

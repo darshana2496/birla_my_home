@@ -60,7 +60,8 @@ export class VaultPage implements OnInit {
     });
   }
 
-  vaultBirlaUploads(): void {
+  vaultBirlaUploads() {
+
     let encryptedCustId = this.globalService.encryptData(
       this.globalService.customerId
     );
@@ -71,9 +72,7 @@ export class VaultPage implements OnInit {
       vcEndDate: '',
     };
 
-    this.globalService
-      .vaultBirlaUploads(obj)
-      .then((response: any) => {
+    this.globalService.vaultBirlaUploads(obj).then((response: any) => {
         if (
           response.btIsSuccess &&
           response.object 
@@ -81,6 +80,7 @@ export class VaultPage implements OnInit {
           // response.object.subPkgHandoverDocumentList &&
           // response.object.subPkgHandoverDocumentList
         ) {
+
           this.adminUploadedDocs = response.object.subPkgDocumentList ? response.object.subPkgDocumentList : [];
           this.adminHandoverDocs = response.object.subPkgHandoverDocumentList ? response.object.subPkgHandoverDocumentList: [];
           this.adminMiscellaneousDocs = response.object.subPkgMiscDocumentList ? response.object.subPkgMiscDocumentList: [];
@@ -127,7 +127,13 @@ export class VaultPage implements OnInit {
               };
               this.staticVaultList.push(newStaticVal);
             }
+            
+            
           }
+          let groupedArray = this.groupBy(response.object.subPkgDocumentList, 'vcType');
+          this.adminUploadedDocs = groupedArray
+          console.log("***********document filter********", this.adminUploadedDocs)
+            
 
           // handover docs decryption
           for (
@@ -211,6 +217,7 @@ export class VaultPage implements OnInit {
           this.adminHandoverDocs = [];
           this.adminMiscellaneousDocs = [];
         }
+        console.log("Document list", this.adminUploadedDocs)
       })
       .catch((response: any) => {});
   }
@@ -221,6 +228,25 @@ export class VaultPage implements OnInit {
       { name: 'Payment Receipts', count: 0, documentList: '' },
       { name: 'Other Property Letters', count: 0, documentList: '' },
     ];
+  }
+
+  getList(key, arr) {
+    return Object.keys(arr)
+  }
+
+  groupBy(array, property) {
+    return array.reduce((acc, obj) => {
+      const key = obj[property];
+      if (!acc[key]) {
+        acc[key] = [];
+      }
+      acc[key].push(obj);
+      return acc;
+    }, {});
+  }
+
+  getKeys(){
+    return Object.keys(this.adminUploadedDocs)
   }
 
   async viewDocs(docsData) {

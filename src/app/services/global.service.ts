@@ -114,6 +114,20 @@ export class GlobalService {
     });
     return promise;
   }
+  
+  getApfList() {
+    let promise = new Promise((resolve, reject) => {
+      this._http
+        .get(
+          `${environment.serverUrl}project/getProjectAPF/${this.customerId}`
+        )
+        .toPromise()
+        .then((response) => {
+          resolve(response);
+        }).catch(e=>reject(e));
+    });
+    return promise;
+  }
   getAboutBirlaEstates() {
     let promise = new Promise((resolve, reject) => {
       this._http
