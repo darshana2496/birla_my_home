@@ -27,6 +27,8 @@ import { AddProjectComponent } from './add-project/add-project.component';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { AddedProjectSuccessComponent } from './added-project-success/added-project-success.component';
 import { PipesModule } from '../utilities/pipes/pipes.module';
+import { ReferComponent } from './refer/refer.component';
+import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 
 @NgModule({
   imports: [
@@ -58,7 +60,8 @@ import { PipesModule } from '../utilities/pipes/pipes.module';
     AddProjectComponent,
     AddedProjectSuccessComponent,
     PaymentGatewayResponseComponent,
+    ReferComponent
   ],
-  providers: [SocialSharing],
+  providers: [SocialSharing, InAppBrowser],
 })
 export class PagesModule {}

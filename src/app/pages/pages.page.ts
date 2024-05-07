@@ -3,6 +3,7 @@ import { IonSlides, MenuController } from '@ionic/angular';
 import { GlobalService } from './../services/global.service';
 import { Component, ViewChild } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
+import { Browser } from '@capacitor/browser';
 
 @Component({
   selector: 'app-pages',
@@ -48,6 +49,10 @@ export class PagesComponent {
           .then(() => console.log('Dashboard reloaded', this.router.url));
       });
     this.menuCtrl.close();
+  }
+
+  async openWebUrl() {
+    await Browser.open({ url: `https://uat.loyalie.in/birla-loyalty-home?clientToken=${this.globalService.customerId}` });
   }
 
   openPage(action: string) {

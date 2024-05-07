@@ -157,6 +157,25 @@ export class PaymentsPage implements OnInit {
 
           console.log("Pending data", data.objCustomerPortal_PendingPaymentModel);
           
+          if (data.objCustomerPortal_PendingPaymentModel == null) {
+            console.log("null data", data.objCustomerPortal_PendingPaymentModel)
+            this.pendingData = this.noPendingData;
+          } else {
+            console.log("this.pendingData", this.pendingData)
+            this.pendingData = data.objCustomerPortal_PendingPaymentModel;
+            this.MakePaymentsPage.outstandingPayment =
+              this.pendingData.vcTotaloutstanding;
+            if (
+              this.MakePaymentsPage.outstandingPayment &&
+              this.MakePaymentsPage.outstandingPayment != null &&
+              this.MakePaymentsPage.outstandingPayment != 'N/A' &&
+              this.MakePaymentsPage.outstandingPayment != 'NIL'
+            ) {
+              this.disableBtn = true;
+            } else {
+              this.disableBtn = false;
+            }
+          }
 
             // Interest 
             if(data.customerPortal_IntrestPaymentModel){
@@ -195,6 +214,13 @@ export class PaymentsPage implements OnInit {
                     .vcIntrestAmountBalenceconverted
                 );
             }
+          
+            
+          if (data.customerPortal_IntrestPaymentModel == null) {
+            this.interestData = this.noInterestData;
+          } else {
+            this.interestData = data.customerPortal_IntrestPaymentModel;
+          }
 
           data.customerPortal_FuturePaymentModel.vcTotalamountpayable =
             this.globalService.decrypt(
@@ -237,6 +263,26 @@ export class PaymentsPage implements OnInit {
             }
           );
 
+          if (data.customerPortal_FuturePaymentModel == null) {
+            this.futureData = this.noFutureData;
+          } else {
+            data.customerPortal_FuturePaymentModel.customerPortal_SubFuturePaymentModelList.map(
+              (obj) => {
+                if (
+                  obj.vcAmountpayable != null ||
+                  obj.vcAmountpayable != undefined
+                ) {
+                  if (typeof obj.vcAmountpayable == 'string')
+                    obj.vcAmountpayable = Math.round(
+                      Number(obj.vcAmountpayable)
+                    ).toString();
+                }
+              }
+            );
+            this.futureData = data.customerPortal_FuturePaymentModel;
+          }
+
+
           data.customerPortal_PastPaymentModelList.forEach((element, index) => {
             data.customerPortal_PastPaymentModelList[index].vcPaymentDate =
               this.globalService.decrypt(
@@ -265,43 +311,9 @@ export class PaymentsPage implements OnInit {
               );
           });
 
-          if (data.objCustomerPortal_PendingPaymentModel == null) {
-            this.pendingData = this.noPendingData;
-          } else {
-            this.pendingData = data.objCustomerPortal_PendingPaymentModel;
-            this.MakePaymentsPage.outstandingPayment =
-              this.pendingData.vcTotaloutstanding;
-            if (
-              this.MakePaymentsPage.outstandingPayment &&
-              this.MakePaymentsPage.outstandingPayment != null &&
-              this.MakePaymentsPage.outstandingPayment != 'N/A' &&
-              this.MakePaymentsPage.outstandingPayment != 'NIL'
-            ) {
-              this.disableBtn = true;
-            } else {
-              this.disableBtn = false;
-            }
-          }
+          
 
-          if (data.customerPortal_FuturePaymentModel == null) {
-            this.futureData = this.noFutureData;
-          } else {
-            data.customerPortal_FuturePaymentModel.customerPortal_SubFuturePaymentModelList.map(
-              (obj) => {
-                if (
-                  obj.vcAmountpayable != null ||
-                  obj.vcAmountpayable != undefined
-                ) {
-                  if (typeof obj.vcAmountpayable == 'string')
-                    obj.vcAmountpayable = Math.round(
-                      Number(obj.vcAmountpayable)
-                    ).toString();
-                }
-              }
-            );
-            this.futureData = data.customerPortal_FuturePaymentModel;
-          }
-
+        
           if (data.customerPortal_PastPaymentModelList == null) {
             this.pastData = this.noPastData;
           } else {
@@ -316,11 +328,6 @@ export class PaymentsPage implements OnInit {
             this.pastData = data.customerPortal_PastPaymentModelList;
           }
 
-          if (data.customerPortal_IntrestPaymentModel == null) {
-            this.interestData = this.noInterestData;
-          } else {
-            this.interestData = data.customerPortal_IntrestPaymentModel;
-          }
         } else {
           this.serverError = true;
         }
