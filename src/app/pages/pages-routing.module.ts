@@ -18,6 +18,7 @@ import { ChequeDetailDropComponent } from './cheque-detail-drop/cheque-detail-dr
 import { CallsComponent } from './calls/calls.component';
 import { ThankYouModalComponent } from './thank-you-modal/thank-you-modal.component';
 import { AddProjectComponent } from './add-project/add-project.component';
+import { ReferComponent } from './refer/refer.component';
 
 const routes: Routes = [
   {
@@ -96,6 +97,10 @@ const routes: Routes = [
       {
         path: 'change-pin',
         component: ChangePinComponent,
+      },
+      {
+        path: 'refer',
+        component: ReferComponent,
       },
     ],
   },
