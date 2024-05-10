@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  // serverUrl: 'https://portalapi.birlaestates.com/api/',
-  serverUrl: 'https://uatportalapi.birlaestates.com/api/',
+  serverUrl: 'https://portalapi.birlaestates.com/api/',
+  // serverUrl: 'https://uatportalapi.birlaestates.com/api/',
 };
 
 /*
