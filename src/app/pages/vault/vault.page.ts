@@ -56,7 +56,11 @@ export class VaultPage implements OnInit {
       vcEndDate: '',
     };
 
+    console.log("encryptedCustId", encryptedCustId);
+
     this.globalService.vaultBirlaUploads(obj).then((response: any) => {
+      let decrypted = this.globalService.decrypt(this.globalService.encryptSecretKey, obj.vcCustomerID)
+      console.log("decrypted val", decrypted)
         if (
           response.btIsSuccess &&
           response.object 
@@ -72,6 +76,11 @@ export class VaultPage implements OnInit {
                 this.globalService.encryptSecretKey,
                 item.vcType
               );
+
+              console.log("Decrypted vctype", this.globalService.decrypt(
+                this.globalService.encryptSecretKey,
+                item.vcType
+              ))
               item.vcFilename = this.globalService.decrypt(
                 this.globalService.encryptSecretKey,
                 item.vcFilename
