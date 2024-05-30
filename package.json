@@ -41,7 +41,7 @@
     "@ionic/angular": "^6.7.5",
     "@ionic/storage-angular": "^3.0.6",
     "capacitor-razorpay": "github:razorpay/razorpay-capacitor",
-    "cordova": "^6.1.1",
+    "cordova": "^6.5.0",
     "cordova-plugin-advanced-http": "^3.3.1",
     "cordova-plugin-device": "^2.1.0",
     "cordova-plugin-file": "^7.0.0",
