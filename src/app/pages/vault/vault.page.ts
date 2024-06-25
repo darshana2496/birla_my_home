@@ -70,17 +70,14 @@ export class VaultPage implements OnInit {
           this.adminHandoverDocs = response.object.subPkgHandoverDocumentList.length > 0 ? response.object.subPkgHandoverDocumentList: [];
           this.adminMiscellaneousDocs = response.object.subPkgMiscDocumentList.length > 0 ? response.object.subPkgMiscDocumentList: [];
 
-          if(this.adminUploadedDocs.length > 0) {
-            this.adminUploadedDocs.map((item)=> {
+          if (this.adminUploadedDocs.length > 0) {
+            this.adminUploadedDocs = this.adminUploadedDocs.map((item) => {
               item.vcType = this.globalService.decrypt(
                 this.globalService.encryptSecretKey,
                 item.vcType
               );
-
-              console.log("Decrypted vctype", this.globalService.decrypt(
-                this.globalService.encryptSecretKey,
-                item.vcType
-              ))
+              console.log("Decrypted vcType", item.vcType);
+    
               item.vcFilename = this.globalService.decrypt(
                 this.globalService.encryptSecretKey,
                 item.vcFilename
@@ -89,10 +86,12 @@ export class VaultPage implements OnInit {
                 this.globalService.encryptSecretKey,
                 item.vcFileUrl
               );
-  
-            })
-
+              return item; // Ensure to return the transformed item
+            });
+    
+            console.log("Admin Uploaded Docs Before Grouping:", this.adminUploadedDocs);
             this.adminUploadedDocs = this.groupBy(this.adminUploadedDocs, 'vcType');
+            console.log("Admin Uploaded Docs After Grouping:", this.adminUploadedDocs);
           }
 
           if(this.adminHandoverDocs.length > 0){
@@ -109,6 +108,7 @@ export class VaultPage implements OnInit {
                 this.globalService.encryptSecretKey,
                item.vcFileUrl
               );
+              return item; // Ensure to return the transformed item
             })
           }
          
@@ -128,6 +128,7 @@ export class VaultPage implements OnInit {
                 this.globalService.encryptSecretKey,
                 item.vcFileUrl
               );
+              return item; // Ensure to return the transformed item
             })
           }
         } else {
