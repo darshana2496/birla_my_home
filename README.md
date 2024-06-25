@@ -23,7 +23,7 @@ To build project use this command in the root folder >> ionic build
 Sync and update the android and ios changes with  >> ionic cap sync
 Create unsigned build from android studio/xcode for debug apk
 Sign apk using jar signer command,
-jar sign command : jarsigner -keystore BirlaKey app-release-birla-v11.aab birla2022
+jar sign command : jarsigner -keystore BirlaKey app-release-birla-myhome-v7.aab birla2022
 jar sign password : Birla2022
 
 Create a signed build from android studio/xcode for bundled file and deploy it over playstore and appstore

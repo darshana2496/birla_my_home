@@ -809,6 +809,7 @@ export class GlobalService {
         .toPromise()
         .then((response: any) => {
           if (response.btIsSuccess) {
+            // alert("Make payment line 812: "+ JSON.stringify(response.object))
             let obj = response.object;
             //set razoppay auth
             this.razorPayAuth.vcKeyId = obj.vcKeyID;
@@ -1008,4 +1009,5 @@ export class GlobalService {
 
     return response;
   }
+  
 }
