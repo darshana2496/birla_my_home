@@ -1,0 +1,90 @@
+.lyt-section {
+    &.typ-bg {
+        --background: url(../../images/mainbg.jpg)0 -60% / 103% 92% no-repeat #f9f9f9;
+        background-size: cover;
+    }
+
+    &.typ-search {
+        .scroll-content {
+            box-shadow: none;
+        }
+    }
+
+    .common-content {
+        color: $clr-text-color;
+        font-size: 1.4rem;
+    }
+
+    &.bottom-footer {
+        .footer {
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+            padding: 20px;
+        }
+    }
+
+    &.need-help {
+        .common-content {
+            margin-bottom: 30px;
+        }
+    }
+
+    &.listing {
+        .scroll-content {
+            padding: 0 16px;
+        }
+    }
+
+    &.tabs {
+        .scroll-content {
+            padding: 0;
+        }
+
+        .tab-content {
+            padding: 16px;
+        }
+    }
+
+    &.typ-bg-uploads {
+        // background: url(../../imagesbgVault.jpg) no-repeat center center;
+        // background-size: cover;
+    }
+
+    &.typ-bg-uploads-img {
+        background: url(../../images/bgVault.jpg) no-repeat center center #f9f9f9;
+        background-size: cover;
+    }
+
+    &.bg-color {
+        // background: #fafafa;
+        --background: url(../../images/topShadow.png) repeat-x 0 0px #ffffff;
+    }
+
+    &.typ-steps {
+        .list {
+            .item {
+                margin-bottom: 40px;
+            }
+        }
+    }
+
+    &.feedbackQuery2 {
+        .document-list {
+            .text {
+                .title {
+                    margin-bottom: 3px !important;
+                }
+
+                .status-type {
+                    font-size: 1rem;
+                    line-height: 1rem;
+                    color: #840c6f;
+                    font-weight: 600;
+                    margin: 0;
+                    margin-top: 3px !important;
+                }
+            }
+        }
+    }
+}

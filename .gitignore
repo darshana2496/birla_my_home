@@ -15,9 +15,9 @@ log.txt
 
 # Ionic
 /.ionic
-/www
-/platforms
-/plugins
+# /www
+# /platforms
+# /plugins
 
 # Compiled output
 /dist
@@ -56,5 +56,5 @@ yarn-error.log
 testem.log
 /typings
 
-/android
-/ios
+# /android
+# /ios
