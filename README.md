@@ -40,3 +40,19 @@ password - Birl@2016
 # IOS appstore credentials :
 Email - apple@birlaestates.com
 Password - B!rl@*123*&
+
+# Issues and their fixes
+- If android resource linking fails try out following steps,
+
+1. run "npm install -g cordova-res"
+2. next "cordova-res --skip-config --copy"
+3. If issues are related to app icon create new app icon from android studio => right click on "app" folder => click "New" => "Image assets" => configure new app icon with name "appico" (select icon from existing resource folder).
+4. sync app and rerun 
+
+
+- If android colors.xml file not found create file in android > app > src > main > res > values > colors.xml. write below code in it,
+
+<resources>
+    <color name="purple_200">#840c6f</color>
+    <!-- Add other color definitions here -->
+</resources>
