@@ -28,7 +28,7 @@ export class PaymentsPage implements OnInit {
     vcTotalreceivedconverted: '0',
     paymentVideoLink: ""
   };
-  
+
   interestData: IPaymentInterestData = {
     vcIntrestAmount: '0',
     vcIntrestAmountBalence: '0',
@@ -69,7 +69,7 @@ export class PaymentsPage implements OnInit {
     vcTotalreceivedconverted: '0',
     paymentVideoLink: ""
   };
- 
+
   noInterestData: any = {
     vcIntrestAmount: '0',
     vcIntrestAmountBalence: '0',
@@ -97,7 +97,7 @@ export class PaymentsPage implements OnInit {
     public globalService: GlobalService,
     public route: Router,
     public socialShare: SocialSharing
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.getPaymentDetails();
@@ -152,7 +152,7 @@ export class PaymentsPage implements OnInit {
                 data.objCustomerPortal_PendingPaymentModel
                   .vcTotaloutstandingconverted
               );
-            
+
             data.objCustomerPortal_PendingPaymentModel.paymentVideoLink =
               this.globalService.decrypt(
                 this.globalService.encryptSecretKey,
@@ -160,119 +160,119 @@ export class PaymentsPage implements OnInit {
                   .paymentVideoLink
               );
 
-              this.pendingData = data.objCustomerPortal_PendingPaymentModel;
-              this.MakePaymentsPage.outstandingPayment =
-                this.pendingData.vcTotaloutstanding;
-              if (
-                this.MakePaymentsPage.outstandingPayment &&
-                this.MakePaymentsPage.outstandingPayment != null &&
-                this.MakePaymentsPage.outstandingPayment != 'N/A' &&
-                this.MakePaymentsPage.outstandingPayment != 'NIL'
-              ) {
-                this.disableBtn = true;
-              } else {
-                this.disableBtn = false;
-              }
+            this.pendingData = data.objCustomerPortal_PendingPaymentModel;
+            this.MakePaymentsPage.outstandingPayment =
+              this.pendingData.vcTotaloutstanding;
+            if (
+              this.MakePaymentsPage.outstandingPayment &&
+              this.MakePaymentsPage.outstandingPayment != null &&
+              this.MakePaymentsPage.outstandingPayment != 'N/A' &&
+              this.MakePaymentsPage.outstandingPayment != 'NIL'
+            ) {
+              this.disableBtn = true;
+            } else {
+              this.disableBtn = false;
+            }
           }
 
 
-            if(data.customerPortal_IntrestPaymentModel){
+          if (data.customerPortal_IntrestPaymentModel) {
 
-              data.customerPortal_IntrestPaymentModel.vcIntrestAmount =
-                this.globalService.decrypt(
-                  this.globalService.encryptSecretKey,
-                  data.customerPortal_IntrestPaymentModel.vcIntrestAmount
-                );
-              data.customerPortal_IntrestPaymentModel.vcIntrestAmountconverted =
-                this.globalService.decrypt(
-                  this.globalService.encryptSecretKey,
-                  data.customerPortal_IntrestPaymentModel
-                    .vcIntrestAmountconverted
-                );
-              data.customerPortal_IntrestPaymentModel.vcIntrestAmountPaid =
-                this.globalService.decrypt(
-                  this.globalService.encryptSecretKey,
-                  data.customerPortal_IntrestPaymentModel.vcIntrestAmountPaid
-                );
-              data.customerPortal_IntrestPaymentModel.vcIntrestAmountPaidconverted =
-                this.globalService.decrypt(
-                  this.globalService.encryptSecretKey,
-                  data.customerPortal_IntrestPaymentModel
-                    .vcIntrestAmountPaidconverted
-                );
-              data.customerPortal_IntrestPaymentModel.vcIntrestAmountBalence =
-                this.globalService.decrypt(
-                  this.globalService.encryptSecretKey,
-                  data.customerPortal_IntrestPaymentModel.vcIntrestAmountBalence
-                );
-              data.customerPortal_IntrestPaymentModel.vcIntrestAmountBalenceconverted =
-                this.globalService.decrypt(
-                  this.globalService.encryptSecretKey,
-                  data.customerPortal_IntrestPaymentModel
-                    .vcIntrestAmountBalenceconverted
-                );
-                this.interestData = data.customerPortal_IntrestPaymentModel;
-            } else {
-              this.interestData = this.noInterestData;
-            }
-          
-            
-            if(data.customerPortal_FuturePaymentModel){
+            data.customerPortal_IntrestPaymentModel.vcIntrestAmount =
+              this.globalService.decrypt(
+                this.globalService.encryptSecretKey,
+                data.customerPortal_IntrestPaymentModel.vcIntrestAmount
+              );
+            data.customerPortal_IntrestPaymentModel.vcIntrestAmountconverted =
+              this.globalService.decrypt(
+                this.globalService.encryptSecretKey,
+                data.customerPortal_IntrestPaymentModel
+                  .vcIntrestAmountconverted
+              );
+            data.customerPortal_IntrestPaymentModel.vcIntrestAmountPaid =
+              this.globalService.decrypt(
+                this.globalService.encryptSecretKey,
+                data.customerPortal_IntrestPaymentModel.vcIntrestAmountPaid
+              );
+            data.customerPortal_IntrestPaymentModel.vcIntrestAmountPaidconverted =
+              this.globalService.decrypt(
+                this.globalService.encryptSecretKey,
+                data.customerPortal_IntrestPaymentModel
+                  .vcIntrestAmountPaidconverted
+              );
+            data.customerPortal_IntrestPaymentModel.vcIntrestAmountBalence =
+              this.globalService.decrypt(
+                this.globalService.encryptSecretKey,
+                data.customerPortal_IntrestPaymentModel.vcIntrestAmountBalence
+              );
+            data.customerPortal_IntrestPaymentModel.vcIntrestAmountBalenceconverted =
+              this.globalService.decrypt(
+                this.globalService.encryptSecretKey,
+                data.customerPortal_IntrestPaymentModel
+                  .vcIntrestAmountBalenceconverted
+              );
+            this.interestData = data.customerPortal_IntrestPaymentModel;
+          } else {
+            this.interestData = this.noInterestData;
+          }
 
-              data.customerPortal_FuturePaymentModel.vcTotalamountpayable =
-                this.globalService.decrypt(
-                  this.globalService.encryptSecretKey,
-                  data.customerPortal_FuturePaymentModel.vcTotalamountpayable
-                );
-              data.customerPortal_FuturePaymentModel.vcTotalamountpayableconverted =
-                this.globalService.decrypt(
-                  this.globalService.encryptSecretKey,
-                  data.customerPortal_FuturePaymentModel
-                    .vcTotalamountpayableconverted
-                );
-    
-              console.log("data.customerPortal_PastPaymentModelList", data.customerPortal_PastPaymentModelList)
-    
-              data.customerPortal_FuturePaymentModel.customerPortal_SubFuturePaymentModelList.map(
-                (element, index) => {
-                  element.vcPaymentpercent = this.globalService.decrypt(
-                    this.globalService.encryptSecretKey,
-                    element.vcPaymentpercent
-                  );
-                  element.vcAmountpayable = this.globalService.decrypt(
-                    this.globalService.encryptSecretKey,
-                    element.vcAmountpayable
-                  );
-                  element.vcaAmountpayableconverted = this.globalService.decrypt(
-                    this.globalService.encryptSecretKey,
-                    element.vcaAmountpayableconverted
-                  );
-                  element.vcDescription = this.globalService.decrypt(
-                    this.globalService.encryptSecretKey,
-                    element.vcDescription
-                  );
-                }
+
+          if (data.customerPortal_FuturePaymentModel) {
+
+            data.customerPortal_FuturePaymentModel.vcTotalamountpayable =
+              this.globalService.decrypt(
+                this.globalService.encryptSecretKey,
+                data.customerPortal_FuturePaymentModel.vcTotalamountpayable
+              );
+            data.customerPortal_FuturePaymentModel.vcTotalamountpayableconverted =
+              this.globalService.decrypt(
+                this.globalService.encryptSecretKey,
+                data.customerPortal_FuturePaymentModel
+                  .vcTotalamountpayableconverted
               );
 
-              data.customerPortal_FuturePaymentModel.customerPortal_SubFuturePaymentModelList.map(
-                (obj) => {
-                  if (
-                    obj.vcAmountpayable != null ||
-                    obj.vcAmountpayable != undefined
-                  ) {
-                    if (typeof obj.vcAmountpayable == 'string')
-                      obj.vcAmountpayable = Math.round(
-                        Number(obj.vcAmountpayable)
-                      ).toString();
-                  }
+            console.log("data.customerPortal_PastPaymentModelList", data.customerPortal_PastPaymentModelList)
+
+            data.customerPortal_FuturePaymentModel.customerPortal_SubFuturePaymentModelList.map(
+              (element, index) => {
+                element.vcPaymentpercent = this.globalService.decrypt(
+                  this.globalService.encryptSecretKey,
+                  element.vcPaymentpercent
+                );
+                element.vcAmountpayable = this.globalService.decrypt(
+                  this.globalService.encryptSecretKey,
+                  element.vcAmountpayable
+                );
+                element.vcaAmountpayableconverted = this.globalService.decrypt(
+                  this.globalService.encryptSecretKey,
+                  element.vcaAmountpayableconverted
+                );
+                element.vcDescription = this.globalService.decrypt(
+                  this.globalService.encryptSecretKey,
+                  element.vcDescription
+                );
+              }
+            );
+
+            data.customerPortal_FuturePaymentModel.customerPortal_SubFuturePaymentModelList.map(
+              (obj) => {
+                if (
+                  obj.vcAmountpayable != null ||
+                  obj.vcAmountpayable != undefined
+                ) {
+                  if (typeof obj.vcAmountpayable == 'string')
+                    obj.vcAmountpayable = Math.round(
+                      Number(obj.vcAmountpayable)
+                    ).toString();
                 }
-              );
-              this.futureData = data.customerPortal_FuturePaymentModel;
-            } else {
+              }
+            );
+            this.futureData = data.customerPortal_FuturePaymentModel;
+          } else {
             this.futureData = this.noFutureData;
-            }
+          }
 
-          if(data.customerPortal_PastPaymentModelList){
+          if (data.customerPortal_PastPaymentModelList) {
 
             data.customerPortal_PastPaymentModelList.map((element, index) => {
               element.vcPaymentDate =
@@ -320,7 +320,7 @@ export class PaymentsPage implements OnInit {
           this.serverError = true;
         }
       })
-      .catch((response: any) => {});
+      .catch((response: any) => { });
   }
 
   pageReload() {
@@ -369,6 +369,7 @@ export class PaymentsPage implements OnInit {
     this.route.navigate(['/cheque-drop']);
   }
   makePayment() {
+    console.log(this.MakePaymentsPage, 'this.MakePaymentsPage');
     if (this.MakePaymentsPage.outstandingPayment > 0) {
       this.route.navigate([
         '/make-payment',
@@ -382,7 +383,7 @@ export class PaymentsPage implements OnInit {
 
   async openUrl(link: any) {
     if (Browser) {
-    await Browser.open({url : link});
+      await Browser.open({ url: link });
     } else {
       alert("Not ready")
     }
