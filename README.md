@@ -22,7 +22,9 @@ Clean gradle before building apk. In android folder enter this command >> .\grad
 To build project use this command in the root folder >> ionic build 
 Sync and update the android and ios changes with  >> ionic cap sync
 Create unsigned build from android studio/xcode for debug apk
+in android studio --> Build -->Generate Signed --> Android App Bundle
 Sign apk using jar signer command,
+cd to D:\deploy paste the new created .aab file  
 jar sign command : jarsigner -keystore BirlaKey app-release-birla-myhome-v7.aab birla2022
 jar sign password : Birla2022
 
@@ -40,19 +42,3 @@ password - Birl@2016
 # IOS appstore credentials :
 Email - apple@birlaestates.com
 Password - B!rl@*123*&
-
-# Issues and their fixes
-- If android resource linking fails try out following steps,
-
-1. run "npm install -g cordova-res"
-2. next "cordova-res --skip-config --copy"
-3. If issues are related to app icon create new app icon from android studio => right click on "app" folder => click "New" => "Image assets" => configure new app icon with name "appico" (select icon from existing resource folder).
-4. sync app and rerun 
-
-
-- If android colors.xml file not found create file in android > app > src > main > res > values > colors.xml. write below code in it,
-
-<resources>
-    <color name="purple_200">#840c6f</color>
-    <!-- Add other color definitions here -->
-</resources>
