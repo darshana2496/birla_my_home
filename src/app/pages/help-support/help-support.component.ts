@@ -48,6 +48,7 @@ export class HelpSupportComponent implements OnInit {
       .getRMDetails()
       .then((response: any) => {
         if (response.btIsSuccess) {
+          console.log(response?.object); 
           this.contactTime = response.object.vcWorkingTime;
           this.contactNumber = response.object.vcContactNo;
           this.siteLocation = response.object.vcLocationMap;
