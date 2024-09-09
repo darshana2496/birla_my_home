@@ -8,6 +8,7 @@ import { IonSlides } from '@ionic/angular';
 })
 export class AppIntroPage implements OnInit {
   public static pageName = "AppintroPage";
+  showSplaash = false;
   @ViewChild(IonSlides) slides: IonSlides;
   slideOpts = {
     initialSlide: 0,
@@ -22,6 +23,10 @@ export class AppIntroPage implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    setTimeout(()=>{
+      // console.log('enter in timeout');
+      this.showSplaash = true
+    },3000)
   }
 
   ngAfterViewInit() {

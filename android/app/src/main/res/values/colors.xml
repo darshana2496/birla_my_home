@@ -1,4 +1,5 @@
 <resources>
     <color name="purple_200">#840c6f</color>
+    <color name="white">#ffffff</color>
     <!-- Add other color definitions here -->
 </resources>

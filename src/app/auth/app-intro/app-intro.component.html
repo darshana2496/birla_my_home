@@ -1,10 +1,6 @@
-<ion-content class="bs-appIntro">
+<ion-content *ngIf="showSplaash; else elseBlock" class="bs-appIntro">
   <ion-header class="app-intro-logo-wrap">
-    <app-header
-      class="typ-transparent"
-      [type]="'normal'"
-      [typeTitle]="'logo'"
-    ></app-header>
+    <app-header class="typ-transparent" [type]="'normal'" [typeTitle]="'logo'"></app-header>
   </ion-header>
   <div class="introSlider">
     <ion-slides pager [options]="slideOpts">
@@ -38,12 +34,14 @@
     </ion-slides>
   </div>
   <div class="ion-text-center skipButton">
-    <ion-button
-      class="app-btn btn-link"
-      [routerLink]="['/landing']"
-      [slot]="'end'"
-      >Skip</ion-button
-    >
+    <ion-button class="app-btn btn-link" [routerLink]="['/landing']" [slot]="'end'">Skip</ion-button>
   </div>
 </ion-content>
 
+
+<ng-template #elseBlock>
+  <div class="splash-screen">
+    <img src="../../../assets/images/splash.png" width="200" height="200"
+      style="display: flex;justify-self:center;align-items: center;">
+  </div>
+</ng-template>

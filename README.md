@@ -42,3 +42,6 @@ password - Birl@2016
 # IOS appstore credentials :
 Email - apple@birlaestates.com
 Password - B!rl@*123*&
+
+#Splash Screen Doc
+https://capacitorjs.com/docs/guides/splash-screens-and-icons 
